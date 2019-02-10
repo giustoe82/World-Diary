@@ -18,6 +18,8 @@ class Router {
     var loginVC: LoginVC?
     var mapController: MapVC?
     
+    var myArray: [Entry] = []
+    
     
     //: - MARK: - Navigation
     
@@ -83,6 +85,8 @@ class Router {
     //: - MARK: - Data transfer
     
     func getAllPosts() -> [Entry] {
+        
+        return myArray
         
     }
     

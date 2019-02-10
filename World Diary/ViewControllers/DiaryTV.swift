@@ -42,7 +42,7 @@ class EntryCell: UITableViewCell {
 //TableView Diary
 class DiaryTV: UITableViewController {
     
-    //var presenter: DiaryTVProtocol?
+    var presenter: DiaryTVProtocol?
     
     //Entry data
     var tableViewData: [Day]?

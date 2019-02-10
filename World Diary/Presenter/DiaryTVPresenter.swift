@@ -14,22 +14,22 @@ class DiaryTVPresenter {
     
 }
 
-//extension DiaryTVPresenter: DiaryTVProtocol {
-//    func getAllPosts() {
-//        
-//        router.getAllPosts()
-//    }
-//    
-//    
-//    
-//}
-//
-//
-////MARK: - Protocol -
-//
-//protocol DiaryTVProtocol {
-//    
-//    func getAllPosts() -> [String]
-//    
-//}
+extension DiaryTVPresenter: DiaryTVProtocol {
+    func getAllPosts() -> [Entry]{
+        
+        return (router?.getAllPosts())!
+    }
+    
+    
+    
+}
+
+
+//MARK: - Protocol -
+
+protocol DiaryTVProtocol {
+    
+    func getAllPosts() -> [Entry]
+    
+}
 
