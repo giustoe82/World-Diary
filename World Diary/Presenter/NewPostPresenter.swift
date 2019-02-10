@@ -18,7 +18,6 @@ extension NewPostPresenter: newPostPresenterProtocol {
     
     func goToCamera(){
         router?.goToCamera()
-        
     }
     
 }
@@ -28,6 +27,7 @@ extension NewPostPresenter: newPostPresenterProtocol {
 
 protocol newPostPresenterProtocol {
     
+    func goToCamera()
     
     
 }

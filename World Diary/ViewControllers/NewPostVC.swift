@@ -110,27 +110,27 @@ class NewPostVC: UIViewController {
         let today = month + " " + myString + " " + dayInWeek
         return today
     }
+
+    @IBAction func takePicture(_ sender: Any) {
+        
+        
+        
+        
+        //        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+        //            self.openCamera()
+        //        }))
+        //
+        //        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+        //            self.openGallery()
+        //        }))
+        //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        //        self.present(alert, animated: true, completion: nil)
+    }
+
 }
 
 extension NewPostVC: UIImagePickerControllerDelegate {
-    
-    @IBAction func takePicture(_ sender: UIButton) {
-
-        
-        
-        
-        
-//        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-//        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-//            self.openCamera()
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-//            self.openGallery()
-//        }))
-//        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-    }
     
     func openCamera() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {

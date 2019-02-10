@@ -17,6 +17,7 @@ class Router {
     var leftMenuVC: LeftMenuVC?
     var loginVC: LoginVC?
     var mapController: MapVC?
+    var cameraVC: CameraVC?
     
     var myArray: [Entry] = []
 

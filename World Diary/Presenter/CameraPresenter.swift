@@ -15,9 +15,7 @@ class CameraPresenter {
 }
 
 extension CameraPresenter: CameraPresenterProtocol {
-    func showFullImage() {
-        
-    }
+   
     
 }
 

@@ -68,32 +68,32 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         avSession.startRunning()
     }
     
-    func detectCoreML(pixelBuffer:CVImageBuffer) {
-        func completion(request: VNRequest, error: Error?) {
-            guard let observe = request.results as? [VNClassificationObservation] else { return }
-        }
+//    func detectCoreML(pixelBuffer:CVImageBuffer) {
+//        func completion(request: VNRequest, error: Error?) {
+//            guard let observe = request.results as? [VNClassificationObservation] else { return }
+//        }
+//    
+//        do {
+//            let model = try VNCoreMLModel(for: mlModel.model)
+//            let request = VNCoreMLRequest(model: model, completionHandler: completion)
+//            request.imageCropAndScaleOption = .centerCrop
+//            let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
+//            // let handler = VNImageTranslationAlignmentObservation.
+//            try handler.perform([request])
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//        
+//    }
     
-        do {
-            let model = try VNCoreMLModel(for: mlModel.model)
-            let request = VNCoreMLRequest(model: model, completionHandler: completion)
-            request.imageCropAndScaleOption = .centerCrop
-            let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
-            // let handler = VNImageTranslationAlignmentObservation.
-            try handler.perform([request])
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-    }
     
-    
-    @IBAction func takePic(_ sender: Any) {
-        
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-                selectImageFrom(.photoLibrary)
-                return
-                }
-    }
+//    @IBAction func takePic(_ sender: Any) {
+//
+//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+//                selectImageFrom(.photoLibrary)
+//                return
+//                }
+//    }
     
     //MARK: - Take image
 //    @IBAction func takePhoto(_ sender: UIButton) {

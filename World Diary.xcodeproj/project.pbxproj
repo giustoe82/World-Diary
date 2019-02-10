@@ -10,6 +10,7 @@
 		5534921B221046FF00F30D4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5534921A221046FF00F30D4A /* GoogleService-Info.plist */; };
 		5534921F2210770C00F30D4A /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534921E2210770C00F30D4A /* CameraVC.swift */; };
 		55349223221077D200F30D4A /* CameraPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55349222221077D200F30D4A /* CameraPresenter.swift */; };
+		5534922722108F9400F30D4A /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5534922622108F9300F30D4A /* Motion.m */; };
 		5861052FCD44D603FD151625 /* Pods_World_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EFDA129E7D525560B6B632 /* Pods_World_Diary.framework */; };
 		A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A2220F06840032CCBA /* NewPostVC.swift */; };
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
@@ -37,6 +38,9 @@
 		5534921A221046FF00F30D4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5534921E2210770C00F30D4A /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		55349222221077D200F30D4A /* CameraPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPresenter.swift; sourceTree = "<group>"; };
+		5534922422108F9200F30D4A /* World Diary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "World Diary-Bridging-Header.h"; sourceTree = "<group>"; };
+		5534922522108F9300F30D4A /* Motion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Motion.h; sourceTree = "<group>"; };
+		5534922622108F9300F30D4A /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Motion.m; sourceTree = "<group>"; };
 		A521D5A2220F06840032CCBA /* NewPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostVC.swift; sourceTree = "<group>"; };
 		A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPresenter.swift; sourceTree = "<group>"; };
 		A521D5A6220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 		A5342C082202286000F9C8DB /* World Diary */ = {
 			isa = PBXGroup;
 			children = (
+				5534922522108F9300F30D4A /* Motion.h */,
+				5534922622108F9300F30D4A /* Motion.m */,
 				A5342C0D2202286000F9C8DB /* Main.storyboard */,
 				A5342C092202286000F9C8DB /* AppDelegate.swift */,
 				A5342C1B220302D600F9C8DB /* Router.swift */,
@@ -117,6 +123,7 @@
 				A5342C152202286300F9C8DB /* Info.plist */,
 				5534921A221046FF00F30D4A /* GoogleService-Info.plist */,
 				A5342C072202286000F9C8DB /* Products */,
+				5534922422108F9200F30D4A /* World Diary-Bridging-Header.h */,
 			);
 			path = "World Diary";
 			sourceTree = "<group>";
@@ -192,6 +199,7 @@
 				TargetAttributes = {
 					A5342C052202286000F9C8DB = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -299,6 +307,7 @@
 			files = (
 				A5342C1E2203051A00F9C8DB /* HomePresenter.swift in Sources */,
 				A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */,
+				5534922722108F9400F30D4A /* Motion.m in Sources */,
 				A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */,
 				55349223221077D200F30D4A /* CameraPresenter.swift in Sources */,
 				A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */,
@@ -465,6 +474,7 @@
 			baseConfigurationReference = C569AEE85B68840C2D946B20 /* Pods-World Diary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DKU45Z4H8F;
 				INFOPLIST_FILE = "World Diary/Info.plist";
@@ -474,6 +484,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aleks.World-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "World Diary/World Diary-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -484,6 +496,7 @@
 			baseConfigurationReference = 02C582BAE6CCD8F046A44C42 /* Pods-World Diary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DKU45Z4H8F;
 				INFOPLIST_FILE = "World Diary/Info.plist";
@@ -493,6 +506,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aleks.World-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "World Diary/World Diary-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
