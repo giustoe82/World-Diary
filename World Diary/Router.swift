@@ -18,6 +18,7 @@ class Router {
     var loginVC: LoginVC?
     var mapController: MapVC?
     
+    var myArray: [Entry] = []
     
     //: - MARK: - Navigation
     
@@ -71,19 +72,29 @@ class Router {
     }
     
     func goToNewPost() {
-        let newPostVC = storyBoard.instantiateViewController(withIdentifier: "newPostVC") as! NewPostVC
+        let newPostVC = storyBoard.instantiateViewController(withIdentifier: "newPostVC") as? NewPostVC
         
         let presenter = NewPostPresenter()
         presenter.router = self
-        newPostVC.presenter = presenter
+        newPostVC?.presenter = presenter
         
-        rootController?.navigationController?.pushViewController(newPostVC, animated: true)
+        rootController?.navigationController?.pushViewController(newPostVC!, animated: true)
+    }
+    
+    func goToCollection() {
+        let collectionVC = storyBoard.instantiateViewController(withIdentifier: "collection") as? CollectionVC
+        
+        let presenter = CollectionPresenter()
+        presenter.router = self
+        collectionVC?.presenter = presenter
+        
+        rootController?.navigationController?.pushViewController(collectionVC!, animated: true)
     }
     
     //: - MARK: - Data transfer
     
     func getAllPosts() -> [Entry] {
-        
+        return myArray
     }
     
     

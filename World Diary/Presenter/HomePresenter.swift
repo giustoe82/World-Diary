@@ -16,6 +16,11 @@ class HomePresenter {
 
 extension HomePresenter: PresenterToViewProtocol {
     
+    func goToCollection() {
+        router?.goToCollection()
+    }
+    
+    
     func openLeftMenu() {
         router?.openLeftMenu()
     }
@@ -48,4 +53,5 @@ protocol PresenterToViewProtocol {
     func toMapVC()
     func goToLogin()
     func goToNewPost()
+    func goToCollection()
 }

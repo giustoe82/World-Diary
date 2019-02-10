@@ -10,6 +10,8 @@
 		5861052FCD44D603FD151625 /* Pods_World_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EFDA129E7D525560B6B632 /* Pods_World_Diary.framework */; };
 		A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A2220F06840032CCBA /* NewPostVC.swift */; };
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
+		A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AA221057B00032CCBA /* CollectionPresenter.swift */; };
+		A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AC22105BAA0032CCBA /* CollectionVC.swift */; };
 		A5342C0A2202286000F9C8DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C092202286000F9C8DB /* AppDelegate.swift */; };
 		A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C0B2202286000F9C8DB /* HomeVC.swift */; };
 		A5342C0F2202286000F9C8DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5342C0D2202286000F9C8DB /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 		A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPresenter.swift; sourceTree = "<group>"; };
 		A521D5A6220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Main.strings"; sourceTree = "<group>"; };
 		A521D5A7220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A521D5AA221057B00032CCBA /* CollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPresenter.swift; sourceTree = "<group>"; };
+		A521D5AC22105BAA0032CCBA /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		A5342C062202286000F9C8DB /* World Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "World Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5342C092202286000F9C8DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5342C0B2202286000F9C8DB /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 				A5342C2D2205BF3A00F9C8DB /* MapPresenter.swift */,
 				A5F9E094220E1446006514D5 /* LeftMenuPresenter.swift */,
 				A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */,
+				A521D5AA221057B00032CCBA /* CollectionPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				A5F9E092220E0E2A006514D5 /* LeftMenuVC.swift */,
 				A5B613E7220EDD9200D6BEAA /* LoginVC.swift */,
 				A521D5A2220F06840032CCBA /* NewPostVC.swift */,
+				A521D5AC22105BAA0032CCBA /* CollectionVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -287,11 +293,13 @@
 			files = (
 				A5342C1E2203051A00F9C8DB /* HomePresenter.swift in Sources */,
 				A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */,
+				A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */,
 				A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */,
 				A5F9E095220E1446006514D5 /* LeftMenuPresenter.swift in Sources */,
 				A5342C272203A4BE00F9C8DB /* UIView+Extension.swift in Sources */,
 				A5342C2222030A5300F9C8DB /* DiaryTVPresenter.swift in Sources */,
 				A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */,
+				A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */,
 				A5342C1C220302D600F9C8DB /* Router.swift in Sources */,
 				A5F9E093220E0E2A006514D5 /* LeftMenuVC.swift in Sources */,
 				A5342C2C2205BF0000F9C8DB /* MapVC.swift in Sources */,

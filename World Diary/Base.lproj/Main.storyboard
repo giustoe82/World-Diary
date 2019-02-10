@@ -313,6 +313,9 @@
                                                         <real key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="toCollection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9lc-pO-jzq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -595,6 +598,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qY0-s7-BwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="824"/>
+        </scene>
+        <!--CollectionVC-->
+        <scene sceneID="G62-Pz-5mr">
+            <objects>
+                <viewController storyboardIdentifier="collection" id="eAa-V6-vlZ" customClass="CollectionVC" customModule="World_Diary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ha0-Sd-NAE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This will be the collectionVC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yx-CL-80f">
+                                <rect key="frame" x="53" y="273.5" width="214.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5Yx-CL-80f" firstAttribute="centerX" secondItem="ha0-Sd-NAE" secondAttribute="centerX" id="akl-C4-iWh"/>
+                            <constraint firstItem="5Yx-CL-80f" firstAttribute="centerY" secondItem="ha0-Sd-NAE" secondAttribute="centerY" id="fAb-91-oN5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JSw-vS-OuA"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AwY-vM-cRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980.625" y="823.94366197183103"/>
         </scene>
     </scenes>
     <resources>

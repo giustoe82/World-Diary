@@ -44,5 +44,8 @@ class HomeVC: UIViewController {
     @IBAction func goToNewPost(_ sender: Any) {
         presenter?.goToNewPost()
     }
+    @IBAction func toCollection(_ sender: Any) {
+        presenter?.goToCollection()
+    }
 }
 
