@@ -459,6 +459,59 @@
             </objects>
             <point key="canvasLocation" x="980.625" y="26.408450704225352"/>
         </scene>
+        <!--CameraVC-->
+        <scene sceneID="bcf-Fn-vsA">
+            <objects>
+                <viewController id="NOS-Ok-tda" customClass="CameraVC" customModule="World_Diary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="95G-vg-NFI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDz-gx-7ZK">
+                                <rect key="frame" x="47" y="449" width="226" height="21"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxG-He-YfW">
+                                <rect key="frame" x="124" y="503" width="73" height="30"/>
+                                <color key="backgroundColor" red="0.0056815127329999998" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Take Pic "/>
+                                <connections>
+                                    <action selector="takePic:" destination="NOS-Ok-tda" eventType="touchUpInside" id="oma-uk-xpQ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2OG-Bk-ot4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="441"/>
+                                <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hxG-He-YfW" firstAttribute="leading" secondItem="IuL-In-I9R" secondAttribute="leading" constant="124" id="2Sv-yC-cIN"/>
+                            <constraint firstItem="IuL-In-I9R" firstAttribute="bottom" secondItem="WDz-gx-7ZK" secondAttribute="bottom" constant="98" id="2ug-Wk-vgV"/>
+                            <constraint firstItem="IuL-In-I9R" firstAttribute="trailing" secondItem="hxG-He-YfW" secondAttribute="trailing" constant="123" id="4Oj-Hi-IAO"/>
+                            <constraint firstItem="IuL-In-I9R" firstAttribute="trailing" secondItem="WDz-gx-7ZK" secondAttribute="trailing" constant="47" id="6ae-tT-Rly"/>
+                            <constraint firstItem="IuL-In-I9R" firstAttribute="bottom" secondItem="2OG-Bk-ot4" secondAttribute="bottom" constant="127" id="ORr-rv-yyD"/>
+                            <constraint firstItem="IuL-In-I9R" firstAttribute="bottom" secondItem="hxG-He-YfW" secondAttribute="bottom" constant="35" id="YNP-8r-VoB"/>
+                            <constraint firstItem="WDz-gx-7ZK" firstAttribute="leading" secondItem="IuL-In-I9R" secondAttribute="leading" constant="47" id="apm-FY-Bj7"/>
+                            <constraint firstItem="WDz-gx-7ZK" firstAttribute="top" secondItem="IuL-In-I9R" secondAttribute="top" constant="429" id="bIc-fG-c4S"/>
+                            <constraint firstItem="2OG-Bk-ot4" firstAttribute="top" secondItem="95G-vg-NFI" secondAttribute="top" id="nMf-ld-RoG"/>
+                            <constraint firstItem="2OG-Bk-ot4" firstAttribute="trailing" secondItem="IuL-In-I9R" secondAttribute="trailing" id="plk-oN-j2A"/>
+                            <constraint firstItem="2OG-Bk-ot4" firstAttribute="leading" secondItem="IuL-In-I9R" secondAttribute="leading" id="zPh-4E-G8y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IuL-In-I9R"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="2OG-Bk-ot4" id="ZIH-rN-zjF"/>
+                        <outlet property="objectLabel" destination="WDz-gx-7ZK" id="QZd-RP-dF7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JPr-MS-r11" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1923.75" y="22.183098591549296"/>
+        </scene>
         <!--MapVC-->
         <scene sceneID="bqE-Yr-7B3">
             <objects>

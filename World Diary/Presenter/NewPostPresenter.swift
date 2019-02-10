@@ -16,7 +16,10 @@ class NewPostPresenter {
 
 extension NewPostPresenter: newPostPresenterProtocol {
     
-    
+    func goToCamera(){
+        router?.goToCamera()
+        
+    }
     
 }
 

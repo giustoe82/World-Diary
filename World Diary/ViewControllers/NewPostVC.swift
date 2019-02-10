@@ -115,17 +115,21 @@ class NewPostVC: UIViewController {
 extension NewPostVC: UIImagePickerControllerDelegate {
     
     @IBAction func takePicture(_ sender: UIButton) {
+
         
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
         
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallery()
-        }))
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
+        
+//        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+//        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+//            self.openCamera()
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+//            self.openGallery()
+//        }))
+//        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
     }
     
     func openCamera() {

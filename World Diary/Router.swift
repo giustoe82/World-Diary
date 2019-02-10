@@ -99,6 +99,15 @@ class Router {
     
     }
     
+    func goToCamera(){
+        let cameraVC = storyBoard.instantiateViewController(withIdentifier: "camera") as? CameraVC
+        
+        let presenter = CameraPresenter()
+        presenter.router = self
+        cameraVC?.presenter = presenter
+        
+        rootController?.navigationController?.pushViewController(cameraVC!, animated: true)
+    }
     
     func logOut(){
         try? Auth.auth().signOut()
