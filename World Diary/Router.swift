@@ -19,6 +19,7 @@ class Router {
     var mapController: MapVC?
     
     var myArray: [Entry] = []
+
     
     //: - MARK: - Navigation
     
@@ -95,6 +96,7 @@ class Router {
     
     func getAllPosts() -> [Entry] {
         return myArray
+    
     }
     
     

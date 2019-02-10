@@ -15,8 +15,8 @@ class DiaryTVPresenter {
 }
 
 extension DiaryTVPresenter: DiaryTVProtocol {
+
     func getAllPosts() -> [Entry] {
-        
         return (router?.getAllPosts())!
     }
     
