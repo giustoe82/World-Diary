@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1067850097058-jlgt7j5f30c6o7p6cth2u1bq8pulg85d.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1067850097058-jlgt7j5f30c6o7p6cth2u1bq8pulg85d</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZRqgpHTbMMvShh1fYGjn3hpN7fHuCVHE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1067850097058</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.marcog.World-Diary</string>
+	<key>PROJECT_ID</key>
+	<string>worlddiary-fc581</string>
+	<key>STORAGE_BUCKET</key>
+	<string>worlddiary-fc581.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1067850097058:ios:3be77d3f2d2c0099</string>
+	<key>DATABASE_URL</key>
+	<string>https://worlddiary-fc581.firebaseio.com</string>
+</dict>
+</plist>

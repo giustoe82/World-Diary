@@ -1,0 +1,60 @@
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "0GK-0O-L8O"; */
+"0GK-0O-L8O.normalTitle" = "Save";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "0UB-Zh-v5M"; */
+"0UB-Zh-v5M.title" = "Item";
+
+/* Class = "UITextField"; placeholder = "Repeat password"; ObjectID = "1Du-Yd-I2A"; */
+"1Du-Yd-I2A.placeholder" = "Repeat password";
+
+/* Class = "UILabel"; text = "February 1   friday"; ObjectID = "2TZ-0N-jLa"; */
+"2TZ-0N-jLa.text" = "February 1   friday";
+
+/* Class = "UIButton"; normalTitle = "To Diary"; ObjectID = "6gM-2d-qgK"; */
+"6gM-2d-qgK.normalTitle" = "To Diary";
+
+/* Class = "UILabel"; text = "17:55"; ObjectID = "9Ps-oi-ciE"; */
+"9Ps-oi-ciE.text" = "17:55";
+
+/* Class = "UITextField"; placeholder = "Insert Password"; ObjectID = "El0-TI-bHK"; */
+"El0-TI-bHK.placeholder" = "Insert Password";
+
+/* Class = "UILabel"; text = "OR"; ObjectID = "ExR-RF-9pf"; */
+"ExR-RF-9pf.text" = "OR";
+
+/* Class = "UIButton"; normalTitle = "To Map"; ObjectID = "FT8-gf-ZmQ"; */
+"FT8-gf-ZmQ.normalTitle" = "To Map";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "Hwe-bN-jIv"; */
+"Hwe-bN-jIv.normalTitle" = "Sign Up";
+
+/* Class = "UILabel"; text = "Log out"; ObjectID = "Idp-Wk-Wkl"; */
+"Idp-Wk-Wkl.text" = "Log out";
+
+/* Class = "UILabel"; text = "Stockholm, Humlegatan 23"; ObjectID = "Oyd-qx-5vv"; */
+"Oyd-qx-5vv.text" = "Stockholm, Humlegatan 23";
+
+/* Class = "UIButton"; normalTitle = "Collection"; ObjectID = "Tgx-m4-weL"; */
+"Tgx-m4-weL.normalTitle" = "Collection";
+
+/* Class = "UILabel"; text = "Snowy day!!! "; ObjectID = "VC2-hw-Pts"; */
+"VC2-hw-Pts.text" = "Snowy day!!! ";
+
+/* Class = "UITextField"; placeholder = "What's on your mind?"; ObjectID = "VS9-7h-JcJ"; */
+"VS9-7h-JcJ.placeholder" = "What's on your mind?";
+
+/* Class = "UIButton"; normalTitle = "Take a picture"; ObjectID = "WNL-KJ-A5p"; */
+"WNL-KJ-A5p.normalTitle" = "Take a picture";
+
+/* Class = "UIButton"; normalTitle = "New Post"; ObjectID = "YKC-AX-CPD"; */
+"YKC-AX-CPD.normalTitle" = "New Post";
+
+/* Class = "UITextField"; placeholder = "E-mail address"; ObjectID = "Zil-Ja-iYp"; */
+"Zil-Ja-iYp.placeholder" = "E-mail address";
+
+/* Class = "UILabel"; text = "World Citizen"; ObjectID = "qRv-7i-fkL"; */
+"qRv-7i-fkL.text" = "World Citizen";
+
+/* Class = "UIButton"; normalTitle = "Switch to Log In"; ObjectID = "sqD-Zz-mOj"; */
+"sqD-Zz-mOj.normalTitle" = "Switch to Log In";
