@@ -113,7 +113,7 @@ class NewPostVC: UIViewController {
 
     @IBAction func takePicture(_ sender: Any) {
         
-        
+        presenter?.goToCamera()
         
         
         //        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)

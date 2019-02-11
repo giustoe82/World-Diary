@@ -93,13 +93,6 @@ class Router {
         rootController?.navigationController?.pushViewController(collectionVC!, animated: true)
     }
     
-    //: - MARK: - Data transfer
-    
-    func getAllPosts() -> [Entry] {
-        return myArray
-    
-    }
-    
     func goToCamera(){
         let cameraVC = storyBoard.instantiateViewController(withIdentifier: "camera") as? CameraVC
         
@@ -109,6 +102,14 @@ class Router {
         
         rootController?.navigationController?.pushViewController(cameraVC!, animated: true)
     }
+    
+    //: - MARK: - Data transfer
+    
+    func getAllPosts() -> [Entry] {
+        return myArray
+    
+    }
+    
     
     func logOut(){
         try? Auth.auth().signOut()

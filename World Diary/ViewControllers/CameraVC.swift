@@ -11,7 +11,7 @@ import AVFoundation
 import Vision
 import CoreML
 
-class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var cameraView: UIView!
     
@@ -23,8 +23,12 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     let newMotion = Motion()
     
     var presenter: CameraPresenterProtocol?
+    var imagePicker: UIImagePickerController!
     
-    
+    enum ImageSource {
+        case photoLibrary
+        case camera
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +48,12 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             let input = try AVCaptureDeviceInput(device: captureDevice)
             avSession.addInput(input)
             
-            avSession.sessionPreset = AVCaptureSession.Preset.high
+            avSession.sessionPreset = AVCaptureSession.Preset.low
             //            avSession.sessionPreset = AVCaptureSession.Preset.vga640x480
             
             let videoOutput = AVCaptureVideoDataOutput()
             videoOutput.alwaysDiscardsLateVideoFrames = true
-            let videoQueue = DispatchQueue(label: "meta", attributes: .concurrent)
+            let videoQueue = DispatchQueue(label: "objectLabel", attributes: .concurrent)
             videoOutput.setSampleBufferDelegate(self, queue: videoQueue)
             avSession.addOutput(videoOutput)
             let videoConnection = videoOutput.connection(with: .video)
@@ -87,14 +91,26 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 //    }
     
     
-//    @IBAction func takePic(_ sender: Any) {
-//
-//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-//                selectImageFrom(.photoLibrary)
-//                return
-//                }
-//    }
+    @IBAction func takePic(_ sender: Any) {
+
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                selectImageFrom(.photoLibrary)
+                return
+                }
+    }
     
+    func selectImageFrom(_ source: ImageSource){
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
+        present(imagePicker, animated: true, completion: nil)
+    }
+
     //MARK: - Take image
 //    @IBAction func takePhoto(_ sender: UIButton) {
 //        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
