@@ -123,8 +123,14 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
             guard let observe = request.results as? [VNClassificationObservation] else { return }
             for classification in observe {
                 if classification.confidence > 0.01 { print(classification.identifier, classification.confidence) }
+              
+                if let topResult = observe.first {
+                    DispatchQueue.main.async {
+                self.objectLabel.text = topResult.identifier + String(format: ", %.2f", topResult.confidence)
+           
+                    }
+                }
             }
-            
         }
     
         do {
@@ -139,6 +145,24 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
     }
+    
+    func detectQR(pixelBuffer:CVImageBuffer) {
+        func compHandler(request: VNRequest, error: Error?) {
+            if let observe = request.results?.first as? VNBarcodeObservation {
+                //                    print(observe.payloadStringValue)
+                DispatchQueue.main.async {
+                    self.objectLabel.text = observe.payloadStringValue
+                }
+            }
+        }
+        
+        let detectReq = VNDetectBarcodesRequest(completionHandler: compHandler)
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
+        detectReq.symbologies = [VNBarcodeSymbology.QR, VNBarcodeSymbology.Code39, VNBarcodeSymbology.EAN13]
+        //            detectReq.symbologies = [VNBarcodeSymbology.EAN13]
+        try? requestHandler.perform([detectReq])
+    }
+    
     
     
          @IBAction func takePic(_ sender: UIButton) {
