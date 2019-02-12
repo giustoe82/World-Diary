@@ -16,10 +16,12 @@ class DiaryTVPresenter {
 
 extension DiaryTVPresenter: DiaryTVProtocol {
 
-    func getAllPosts() -> [Entry] {
-        return (router?.getAllPosts())!
+//    func getAllPosts() -> [Day] {
+//        return prepareArray()
+//    }
+    func prepareArray() -> [Day] {
+        return (router?.fillWith(myArray: (router?.getEntries())!))!
     }
-    
     
     
 }
@@ -29,7 +31,7 @@ extension DiaryTVPresenter: DiaryTVProtocol {
 
 protocol DiaryTVProtocol {
     
-    func getAllPosts() -> [Entry]
-    
+    //func getAllPosts() -> [Day]
+    func prepareArray() -> [Day]
 }
 

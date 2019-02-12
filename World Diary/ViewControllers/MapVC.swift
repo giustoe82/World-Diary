@@ -23,9 +23,11 @@ class MapVC: UIViewController {
     var oneAddress = String()
     var lat: Double?
     var lon: Double?
+    var isLoaded: Bool = false
     
     @IBOutlet weak var myMap: MKMapView!
-
+    @IBOutlet weak var loadingView: UIView!
+    
 }
 
 extension MapVC: CLLocationManagerDelegate, MKMapViewDelegate {
@@ -36,13 +38,20 @@ extension MapVC: CLLocationManagerDelegate, MKMapViewDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         //locationManager.requestLocation()
+        animateLoadingView()
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         locationManager.requestLocation()
         //locationManager.stopUpdatingLocation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        locationManager.stopUpdatingLocation()
+        print(oneAddress)
+        address = ""
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -57,6 +66,10 @@ extension MapVC: CLLocationManagerDelegate, MKMapViewDelegate {
             annotation.coordinate = center
             annotation.title = "Your location"
             myMap.addAnnotation(annotation)
+            if loadingView != nil {
+                loadingView.removeFromSuperview()
+                isLoaded = true
+            }
             
             let userLocation =  CLLocation(latitude: center.latitude, longitude: center.longitude)
             
@@ -115,9 +128,13 @@ extension MapVC: CLLocationManagerDelegate, MKMapViewDelegate {
         manager.requestLocation()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        locationManager.stopUpdatingLocation()
-        print(oneAddress)
-        address = ""
+    func animateLoadingView() {
+        UIView.animate(withDuration: 1.5, delay: 0, options:
+                    [.repeat, .autoreverse], animations: {
+                        self.loadingView.alpha = 0.3
+                })
     }
+    
 }
+
+

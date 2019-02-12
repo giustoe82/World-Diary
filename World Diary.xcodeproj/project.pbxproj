@@ -13,6 +13,7 @@
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
 		A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AA221057B00032CCBA /* CollectionPresenter.swift */; };
 		A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AC22105BAA0032CCBA /* CollectionVC.swift */; };
+		A521D5B02212FDE80032CCBA /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AF2212FDE70032CCBA /* DBManager.swift */; };
 		A5342C0A2202286000F9C8DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C092202286000F9C8DB /* AppDelegate.swift */; };
 		A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C0B2202286000F9C8DB /* HomeVC.swift */; };
 		A5342C0F2202286000F9C8DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5342C0D2202286000F9C8DB /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		A521D5A7220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A521D5AA221057B00032CCBA /* CollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPresenter.swift; sourceTree = "<group>"; };
 		A521D5AC22105BAA0032CCBA /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
+		A521D5AF2212FDE70032CCBA /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		A5342C062202286000F9C8DB /* World Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "World Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5342C092202286000F9C8DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5342C0B2202286000F9C8DB /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				A5342C0D2202286000F9C8DB /* Main.storyboard */,
 				A5342C092202286000F9C8DB /* AppDelegate.swift */,
 				A5342C1B220302D600F9C8DB /* Router.swift */,
+				A521D5AF2212FDE70032CCBA /* DBManager.swift */,
 				A5342C242203A32400F9C8DB /* Presenter */,
 				A5342C252203A34C00F9C8DB /* ViewControllers */,
 				A5342C102202286300F9C8DB /* Assets.xcassets */,
@@ -302,6 +305,7 @@
 				A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */,
 				A5342C1C220302D600F9C8DB /* Router.swift in Sources */,
 				A5F9E093220E0E2A006514D5 /* LeftMenuVC.swift in Sources */,
+				A521D5B02212FDE80032CCBA /* DBManager.swift in Sources */,
 				A5342C2C2205BF0000F9C8DB /* MapVC.swift in Sources */,
 				A5342C2022030A0C00F9C8DB /* DiaryTV.swift in Sources */,
 				A5342C0A2202286000F9C8DB /* AppDelegate.swift in Sources */,
@@ -458,13 +462,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DKU45Z4H8F;
+				DEVELOPMENT_TEAM = TN4YD2CTJH;
 				INFOPLIST_FILE = "World Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aleks.World-Diary";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marcog.World-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,13 +481,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DKU45Z4H8F;
+				DEVELOPMENT_TEAM = TN4YD2CTJH;
 				INFOPLIST_FILE = "World Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aleks.World-Diary";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marcog.World-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

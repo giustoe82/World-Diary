@@ -470,10 +470,37 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kts-So-6fe">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </mapView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-Bv-3XW">
+                                <rect key="frame" x="40" y="214" width="240" height="140"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait while we fetch your position ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzE-Vk-siv">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="140"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="DeR-yi-XSY"/>
+                                    <constraint firstItem="KzE-Vk-siv" firstAttribute="leading" secondItem="Kkg-Bv-3XW" secondAttribute="leading" id="F7G-MJ-ePm"/>
+                                    <constraint firstAttribute="trailing" secondItem="KzE-Vk-siv" secondAttribute="trailing" id="SeZ-iR-dSf"/>
+                                    <constraint firstAttribute="bottom" secondItem="KzE-Vk-siv" secondAttribute="bottom" id="eGq-ib-qae"/>
+                                    <constraint firstAttribute="height" constant="140" id="fQF-sd-Wc4"/>
+                                    <constraint firstItem="KzE-Vk-siv" firstAttribute="top" secondItem="Kkg-Bv-3XW" secondAttribute="top" id="zEH-du-bfT"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Kkg-Bv-3XW" firstAttribute="centerY" secondItem="y1w-9C-HUV" secondAttribute="centerY" id="Bo9-dp-XwW"/>
                             <constraint firstItem="IWt-b1-IN2" firstAttribute="bottom" secondItem="Kts-So-6fe" secondAttribute="bottom" id="fU0-Yz-eXv"/>
+                            <constraint firstItem="Kkg-Bv-3XW" firstAttribute="centerX" secondItem="y1w-9C-HUV" secondAttribute="centerX" id="kh7-Tm-Dhj"/>
                             <constraint firstItem="Kts-So-6fe" firstAttribute="top" secondItem="IWt-b1-IN2" secondAttribute="top" id="qTY-Em-fGV"/>
                             <constraint firstItem="Kts-So-6fe" firstAttribute="leading" secondItem="IWt-b1-IN2" secondAttribute="leading" id="yPg-RT-8DI"/>
                             <constraint firstItem="IWt-b1-IN2" firstAttribute="trailing" secondItem="Kts-So-6fe" secondAttribute="trailing" id="ykq-cn-9Eh"/>
@@ -481,6 +508,7 @@
                         <viewLayoutGuide key="safeArea" id="IWt-b1-IN2"/>
                     </view>
                     <connections>
+                        <outlet property="loadingView" destination="Kkg-Bv-3XW" id="Dav-Tx-un9"/>
                         <outlet property="myMap" destination="Kts-So-6fe" id="pnf-DG-Rci"/>
                     </connections>
                 </viewController>
@@ -497,7 +525,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dayCell" id="0Se-rj-jlg" customClass="DaySectionCell" customModule="World_Diary" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="dayCell" id="0Se-rj-jlg" customClass="DaySectionCell" customModule="World_Diary" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Se-rj-jlg" id="d4r-bM-xwo">
@@ -594,6 +622,9 @@
                             <outlet property="delegate" destination="DL1-l3-eZA" id="R73-m7-ZNy"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="tableView" destination="uSh-e5-La5" id="rdB-N1-oHJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qY0-s7-BwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

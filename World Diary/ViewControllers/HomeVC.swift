@@ -10,6 +10,8 @@ import UIKit
 import SideMenu
 
 class HomeVC: UIViewController {
+    
+    
 
     var presenter: PresenterToViewProtocol?
     
@@ -18,11 +20,13 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //presenter?.prepareArray()
         // (Optional) Prevent status bar area from turning black when menu appears:
         //SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuAnimationFadeStrength = 0.7
         SideMenuManager.default.menuAnimationTransformScaleFactor = 0.9
+        
        
     }
     
@@ -30,7 +34,6 @@ class HomeVC: UIViewController {
         presenter?.goToLogin()
     }
     
-
     @IBAction func openLeftMenuButton(_ sender: Any) {
         presenter?.openLeftMenu()
     }
@@ -41,11 +44,14 @@ class HomeVC: UIViewController {
     @IBAction func toMapButton(_ sender: Any) {
         presenter?.toMapVC()
     }
+    
     @IBAction func goToNewPost(_ sender: Any) {
         presenter?.goToNewPost()
     }
+    
     @IBAction func toCollection(_ sender: Any) {
         presenter?.goToCollection()
     }
+    
 }
 

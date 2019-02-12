@@ -11,6 +11,7 @@ import UIKit
 class HomePresenter {
     
     weak var router: Router?
+    var days: [Day] = []
     
 }
 
@@ -27,6 +28,7 @@ extension HomePresenter: PresenterToViewProtocol {
     
     func toDiaryTV() {
         router?.presentDiaryTV()
+        //prepareArray()
     }
     
     func toMapVC() {
@@ -39,6 +41,10 @@ extension HomePresenter: PresenterToViewProtocol {
     
     func goToNewPost() {
         router?.goToNewPost()
+    }
+    
+    func prepareArray() {
+        router?.fillWith(myArray: (router?.getEntries())!)
     }
     
 }
@@ -54,4 +60,5 @@ protocol PresenterToViewProtocol {
     func goToLogin()
     func goToNewPost()
     func goToCollection()
+    func prepareArray()
 }

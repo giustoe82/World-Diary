@@ -8,19 +8,7 @@
 
 import UIKit
 
-//temp API
-struct Day {
-    var opened = Bool()
-    var date: String?
-    var sectionData: [Entry]?
-}
 
-struct Entry {
-    var dayTime: String?
-    var address: String?
-    var myText: String?
-    var thumbName: String?
-}
 
 //Cell of the day
 class DaySectionCell: UITableViewCell {
@@ -42,27 +30,51 @@ class EntryCell: UITableViewCell {
 //TableView Diary
 class DiaryTV: UITableViewController {
     
+    
+    
+    
+//    var myArray: [Entry] = []
+//    var days: [Day]?
+//    var newDay: Day?
     var presenter: DiaryTVProtocol?
     
     //Entry data
-    var tableViewData: [Day]?
+    var tableViewData: [Day] = [] { didSet{
+        tableView.reloadData()
+        }}
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationItem.leftBarButtonItem?.title = ""
-//        let backButton = UIBarButtonItem(image: UIImage(named: "left-arrow"), style: .plain, target: self, action: #selector(goHome))
-//        self.navigationItem.rightBarButtonItem  = backButton
         
-        let entry00 =  Entry(dayTime: "17:55", address: "Sergel Torg", myText: "Snowy day" , thumbName: "tempSnow")
+        tableView.reloadData()
         
-        
-        tableViewData = [Day(opened: false, date: "February 1 Friday", sectionData: [entry00, entry00]),
-                         Day(opened: false, date: "January 30 Wednesday", sectionData: [entry00]),
-                         Day(opened: false, date: "January 29 Tuesday", sectionData: [entry00, entry00]),
-                         Day(opened: false, date: "January 27 Sunday", sectionData: [entry00, entry00, entry00])]
-       
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewData = (presenter?.prepareArray())!
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        //tableView.reloadData()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        tableViewData.removeAll()
+    }
+        
+        
+        //let day = Day(opened: false, date: "February 1 Friday", sectionData: [entry00, entry00])
+        
+//        tableViewData = [
+//            Day(opened: false, date: "February 1 Friday", sectionData: [entry00, entry00]),
+//                         Day(opened: false, date: "January 30 Wednesday", sectionData: [entry00]),
+//                         Day(opened: false, date: "January 29 Tuesday", sectionData: [entry00, entry00]),
+//                         Day(opened: false, date: "January 27 Sunday", sectionData: [entry00, entry00, entry00])
+//        ]
+       
+    
     
     // MARK: - Functions
   
@@ -71,13 +83,13 @@ class DiaryTV: UITableViewController {
     //Entries are grouped by day. Each day is an expandable cell with subcells for entries
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return (tableViewData?.count)!
+        return (tableViewData.count)
         
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData?[section].opened == true {
-            return (tableViewData?[section].sectionData?.count)! + 1
+        if tableViewData[section].opened == true {
+            return (tableViewData[section].sectionData?.count)! + 1
         } else {
            return 1
         }
@@ -88,9 +100,9 @@ class DiaryTV: UITableViewController {
         if indexPath.row == 0 {
             //section title should be the date
             let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell") as! DaySectionCell
-            cell.dayTitleLabel?.text = tableViewData?[indexPath.section].date
+            cell.dayTitleLabel?.text = tableViewData[indexPath.section].date
             //arrow up or down
-            if tableViewData?[indexPath.section].opened == true {
+            if tableViewData[indexPath.section].opened == true {
                 cell.openCloseArrow.image = UIImage(named: "up-arrow")
             } else {
                 cell.openCloseArrow.image = UIImage(named: "down-arrow")
@@ -99,10 +111,10 @@ class DiaryTV: UITableViewController {
         } else {
             // cell for the entries
             let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell") as! EntryCell
-            cell.timeLabel.text = tableViewData?[indexPath.section].sectionData?[indexPath.row - 1].dayTime
-            cell.addressLabel.text = tableViewData?[indexPath.section].sectionData?[indexPath.row - 1].address
-            cell.commentLabel.text = tableViewData?[indexPath.section].sectionData?[indexPath.row - 1].myText
-            cell.thumbImage.image = UIImage(named: (tableViewData?[indexPath.section].sectionData?[indexPath.row - 1].thumbName)!)
+            cell.timeLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].dayTime
+            cell.addressLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].address
+            cell.commentLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].myText
+            cell.thumbImage.image = UIImage(named: (tableViewData[indexPath.section].sectionData?[indexPath.row - 1].thumbName)!)
             return cell
             
         }
@@ -110,12 +122,12 @@ class DiaryTV: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            if tableViewData?[indexPath.section].opened == true {
-                tableViewData?[indexPath.section].opened = false
+            if tableViewData[indexPath.section].opened == true {
+                tableViewData[indexPath.section].opened = false
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
             } else {
-                tableViewData?[indexPath.section].opened = true
+                tableViewData[indexPath.section].opened = true
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
             }

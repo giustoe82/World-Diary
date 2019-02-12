@@ -12,27 +12,33 @@ import CoreLocation
 
 class NewPostVC: UIViewController {
     
+    
+    
     var presenter: newPostPresenterProtocol?
-
+    var locationManager = CLLocationManager()
+    
     //connection to DB class
     //let dataManager = DBManager()
     
     let imagePicker = UIImagePickerController()
     
     //variables and outlets to be stored
-    var address: String?
+    //var address: String?
     var lat: Double?
     var lon: Double?
     var images: [UIImage]?
     var dayOfPost: String?
     let uid = Auth.auth().currentUser?.uid
-    
+    var address = String()
+    var oneAddress = String()
+    var myLat: Double?
+    var myLon: Double?
     
     @IBOutlet weak var noteTextView: UITextField!
     @IBOutlet weak var imgToSave: UIImageView!
     
 
-    override func viewWillDisappear(_ animated: Bool) {
+ //   override func viewWillDisappear(_ animated: Bool) {
         
 //        if noteTextView.text != "Your new note here ...", noteTextView.text != "" {
 //
@@ -50,22 +56,34 @@ class NewPostVC: UIViewController {
 //            }
 //            dataManager.uploadData()
 //        }
-    }
+//    }
     
     
     
     @IBAction func printDay(_ sender: Any) {
         print(getCurrentDay())
+        getLocation()
     }
     
-    
+    func getLocation() {
+        
+        print(oneAddress)
+        locationManager.stopUpdatingLocation()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        locationManager.delegate = self
         self.navigationItem.title = getCurrentDate()
         
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
     }
+    
+   
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -153,3 +171,80 @@ extension NewPostVC: UIImagePickerControllerDelegate {
     }
 }
 
+extension NewPostVC: CLLocationManagerDelegate {
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        locationManager.stopUpdatingLocation()
+        print(oneAddress)
+        //address = ""
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+       if let coord = manager.location?.coordinate {
+
+            let center = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
+        
+            let userLocation =  CLLocation(latitude: center.latitude, longitude: center.longitude)
+            
+            CLGeocoder().reverseGeocodeLocation(userLocation) { (placemarks, error) in
+                
+                if error != nil {
+                    
+                    print(error!)
+                    
+                } else {
+                    
+                    if let placemark = placemarks?[0] {
+                        
+                        var thoroughfare = ""
+                        if placemark.thoroughfare != nil {
+                            thoroughfare = placemark.thoroughfare!
+                            self.address += thoroughfare + " "
+                        }
+                        
+                        var subThoroughfare = ""
+                        if placemark.subThoroughfare != nil {
+                            subThoroughfare = placemark.subThoroughfare!
+                            self.address += subThoroughfare + " "
+                        }
+                        
+                        var subAdministritiveArea = ""
+                        if placemark.subAdministrativeArea != nil {
+                            subAdministritiveArea = placemark.subAdministrativeArea!
+                            self.address += subAdministritiveArea + " "
+                        }
+                        
+                        var country = ""
+                        if placemark.country != nil {
+                            country = placemark.country!
+                            self.address += country
+                        }
+                        
+                    }
+                    
+                }
+                
+                self.lat = locations[0].coordinate.latitude
+                self.myLat = self.lat
+                self.lon = locations[0].coordinate.longitude
+                self.myLon = self.lon
+                print(self.myLat!)
+                print(self.myLon!)
+                self.oneAddress = self.address
+                self.address = ""
+                //print(self.address)
+                
+            }
+            
+        }
+    }
+
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        manager.stopUpdatingLocation()
+        manager.requestLocation()
+}
+
+}

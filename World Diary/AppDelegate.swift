@@ -25,14 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Instantiate Navigation controller on Start
         let initialViewController = storyBoard.instantiateViewController(withIdentifier: "NavigationHome") as! UINavigationController
         
-//        //Instantiate Login page
-//        let loginVC = initialViewController.viewControllers[0] as! LoginVC
-////        let presenter = HomePresenter()
-////        presenter.router = router
-////        homeViewController.presenter = presenter
-////        router.rootController = homeViewController
-//        window?.rootViewController = initialViewController
-        
         //Instantiate Home ViewController
         let homeViewController = initialViewController.viewControllers[0] as! HomeVC
         let presenter = HomePresenter()
@@ -40,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewController.presenter = presenter
         router.rootController = homeViewController
         window?.rootViewController = initialViewController
+        
+       
         
         return true
     }
