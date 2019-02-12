@@ -11,10 +11,13 @@ import AVFoundation
 import Vision
 import CoreML
 
-class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UINavigationControllerDelegate {
+//UINavigationControllerDelegate
+
+class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
 
     @IBOutlet weak var cameraView: UIView!
-    
+    @IBOutlet weak var scanView: UIView!
+   
     @IBOutlet weak var objectLabel: UILabel!
     
     var avSession = AVCaptureSession()
@@ -25,6 +28,8 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UI
     var presenter: CameraPresenterProtocol?
     var imagePicker: UIImagePickerController!
     
+    let mlModel = DiaryScan()
+    
     enum ImageSource {
         case photoLibrary
         case camera
@@ -32,8 +37,16 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpSession()
+        
+        subLayeras()
+        
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        subLayeras()
+//    }
     
     func setUpSession() {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
@@ -48,7 +61,7 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UI
             let input = try AVCaptureDeviceInput(device: captureDevice)
             avSession.addInput(input)
             
-            avSession.sessionPreset = AVCaptureSession.Preset.low
+            avSession.sessionPreset = AVCaptureSession.Preset.high
             //            avSession.sessionPreset = AVCaptureSession.Preset.vga640x480
             
             let videoOutput = AVCaptureVideoDataOutput()
@@ -63,42 +76,79 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,UI
             print(error)
             return
         }
-        
-        let previewLayer = AVCaptureVideoPreviewLayer(session: avSession)
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
-        previewLayer.frame = cameraView.frame
-        cameraView.layer.addSublayer(previewLayer)
-        
+
         avSession.startRunning()
     }
     
-//    func detectCoreML(pixelBuffer:CVImageBuffer) {
-//        func completion(request: VNRequest, error: Error?) {
-//            guard let observe = request.results as? [VNClassificationObservation] else { return }
-//        }
-//    
-//        do {
-//            let model = try VNCoreMLModel(for: mlModel.model)
-//            let request = VNCoreMLRequest(model: model, completionHandler: completion)
-//            request.imageCropAndScaleOption = .centerCrop
-//            let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
-//            // let handler = VNImageTranslationAlignmentObservation.
-//            try handler.perform([request])
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//        
-//    }
+    func subLayeras(){
+        
+        let previewLayer = AVCaptureVideoPreviewLayer(session: avSession)
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        previewLayer.frame = view.frame
+        cameraView.layer.addSublayer(previewLayer)
+        
+    }
+    
+        func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+            if let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
+                    
+                func imageTranslation(request: VNRequest, error: Error?) {
+                        guard let result = request.results?.first as? VNImageTranslationAlignmentObservation else { return }
+                        let move = result.alignmentTransform
+                        let dist = sqrt(move.tx*move.tx + move.ty*move.ty)
+                        //                    print(dist)
+                        if dist < 10 {
+                            if moved { detectCoreML(pixelBuffer: pixelBuffer) }
+                            moved = false
+                        } else {
+                            moved = true
+                        }
+                    }
+            
+            if let previousPixelBuffer = previousPixelBuffer {
+                let transRequest = VNTranslationalImageRegistrationRequest(targetedCVPixelBuffer: previousPixelBuffer, completionHandler: imageTranslation)
+                let vnImage = VNSequenceRequestHandler()
+                try? vnImage.perform([transRequest], on: pixelBuffer)
+            }
+            
+            previousPixelBuffer = pixelBuffer
+            
+        }
+    
+    }
     
     
-    @IBAction func takePic(_ sender: Any) {
+    func detectCoreML(pixelBuffer:CVImageBuffer) {
+        func completion(request: VNRequest, error: Error?) {
+            guard let observe = request.results as? [VNClassificationObservation] else { return }
+            for classification in observe {
+                if classification.confidence > 0.01 { print(classification.identifier, classification.confidence) }
+            }
+            
+        }
+    
+        do {
+            let model = try VNCoreMLModel(for: mlModel.model)
+            let request = VNCoreMLRequest(model: model, completionHandler: completion)
+            request.imageCropAndScaleOption = .centerCrop
+            let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
+            // let handler = VNImageTranslationAlignmentObservation.
+            try handler.perform([request])
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    
+         @IBAction func takePic(_ sender: UIButton) {
 
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
                 selectImageFrom(.photoLibrary)
                 return
                 }
     }
-    
+
     func selectImageFrom(_ source: ImageSource){
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
