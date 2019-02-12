@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 //Cell of the day
 class DaySectionCell: UITableViewCell {
     @IBOutlet weak var dayTitleLabel: UILabel!
@@ -31,24 +29,22 @@ class EntryCell: UITableViewCell {
 class DiaryTV: UITableViewController {
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    
-//    var myArray: [Entry] = []
-//    var days: [Day]?
-//    var newDay: Day?
     var presenter: DiaryTVProtocol?
     
     //Entry data
     var tableViewData: [Day] = [] { didSet{
         tableView.reloadData()
         }}
+    var isSearching: Bool = false
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        searchBar.delegate = self
         tableView.reloadData()
         
     }
@@ -136,49 +132,29 @@ class DiaryTV: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+}
+
+extension DiaryTV: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            view.endEditing(true)
+            tableView.reloadData()
+        } else {
+            isSearching = true
+            dataManager.filteredEntries = dataManager.EntriesArray.filter { $0.comment.localizedCaseInsensitiveContains( searchText ) ||
+                $0.date.localizedCaseInsensitiveContains( searchText )
+            }
+            tableView.reloadData()
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    //Functions to regulate keyboard behaviour during search
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
