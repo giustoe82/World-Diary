@@ -30,10 +30,8 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     let mlModel = DiaryScan()
     
-    enum ImageSource {
-        case photoLibrary
-        case camera
-    }
+    var PhotoOutputFront: AVCapturePhotoOutput?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +41,6 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         subLayeras()
         
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        subLayeras()
-//    }
     
     func setUpSession() {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
@@ -145,66 +139,6 @@ class CameraVC: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
     }
-    
-    func detectQR(pixelBuffer:CVImageBuffer) {
-        func compHandler(request: VNRequest, error: Error?) {
-            if let observe = request.results?.first as? VNBarcodeObservation {
-                //                    print(observe.payloadStringValue)
-                DispatchQueue.main.async {
-                    self.objectLabel.text = observe.payloadStringValue
-                }
-            }
-        }
-        
-        let detectReq = VNDetectBarcodesRequest(completionHandler: compHandler)
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
-        detectReq.symbologies = [VNBarcodeSymbology.QR, VNBarcodeSymbology.Code39, VNBarcodeSymbology.EAN13]
-        //            detectReq.symbologies = [VNBarcodeSymbology.EAN13]
-        try? requestHandler.perform([detectReq])
-    }
-    
-    
-    
-         @IBAction func takePic(_ sender: UIButton) {
-
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-                selectImageFrom(.photoLibrary)
-                return
-                }
-    }
-
-    func selectImageFrom(_ source: ImageSource){
-        imagePicker =  UIImagePickerController()
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        switch source {
-        case .camera:
-            imagePicker.sourceType = .camera
-        case .photoLibrary:
-            imagePicker.sourceType = .photoLibrary
-        }
-        present(imagePicker, animated: true, completion: nil)
-    }
-
-    //MARK: - Take image
-//    @IBAction func takePhoto(_ sender: UIButton) {
-//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-//            selectImageFrom(.photoLibrary)
-//            return
-//        }
-//        selectImageFrom(.camera)
-//    }
-//
-//    func selectImageFrom(_ source: ImageSource){
-//        imagePicker =  UIImagePickerController()
-//        imagePicker.delegate = self
-//        switch source {
-//        case .camera:
-//            imagePicker.sourceType = .camera
-//        case .photoLibrary:
-//            imagePicker.sourceType = .photoLibrary
-//        }
-//        present(imagePicker, animated: true, completion: nil)
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
