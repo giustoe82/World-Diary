@@ -11,7 +11,7 @@
 		5534921F2210770C00F30D4A /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534921E2210770C00F30D4A /* CameraVC.swift */; };
 		55349223221077D200F30D4A /* CameraPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55349222221077D200F30D4A /* CameraPresenter.swift */; };
 		5534922722108F9400F30D4A /* Motion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5534922622108F9300F30D4A /* Motion.m */; };
-		55A6295A2212FD8600608006 /* DiaryScan.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 55A629592212FD8600608006 /* DiaryScan.mlmodel */; };
+		55A6297E2215D55500608006 /* DiaryScan.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 55A6297D2215D55500608006 /* DiaryScan.mlmodel */; };
 		5861052FCD44D603FD151625 /* Pods_World_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EFDA129E7D525560B6B632 /* Pods_World_Diary.framework */; };
 		A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A2220F06840032CCBA /* NewPostVC.swift */; };
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
@@ -42,7 +42,7 @@
 		5534922422108F9200F30D4A /* World Diary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "World Diary-Bridging-Header.h"; sourceTree = "<group>"; };
 		5534922522108F9300F30D4A /* Motion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Motion.h; sourceTree = "<group>"; };
 		5534922622108F9300F30D4A /* Motion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Motion.m; sourceTree = "<group>"; };
-		55A629592212FD8600608006 /* DiaryScan.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DiaryScan.mlmodel; sourceTree = "<group>"; };
+		55A6297D2215D55500608006 /* DiaryScan.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = DiaryScan.mlmodel; path = ../../../Downloads/DiaryScan.mlmodel; sourceTree = "<group>"; };
 		A521D5A2220F06840032CCBA /* NewPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostVC.swift; sourceTree = "<group>"; };
 		A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPresenter.swift; sourceTree = "<group>"; };
 		A521D5A6220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		A5342C082202286000F9C8DB /* World Diary */ = {
 			isa = PBXGroup;
 			children = (
-				55A629592212FD8600608006 /* DiaryScan.mlmodel */,
+				55A6297D2215D55500608006 /* DiaryScan.mlmodel */,
 				5534922522108F9300F30D4A /* Motion.h */,
 				5534922622108F9300F30D4A /* Motion.m */,
 				A5342C0D2202286000F9C8DB /* Main.storyboard */,
@@ -323,7 +323,7 @@
 				A5342C1C220302D600F9C8DB /* Router.swift in Sources */,
 				A5F9E093220E0E2A006514D5 /* LeftMenuVC.swift in Sources */,
 				A5342C2C2205BF0000F9C8DB /* MapVC.swift in Sources */,
-				55A6295A2212FD8600608006 /* DiaryScan.mlmodel in Sources */,
+				55A6297E2215D55500608006 /* DiaryScan.mlmodel in Sources */,
 				A5342C2022030A0C00F9C8DB /* DiaryTV.swift in Sources */,
 				A5342C0A2202286000F9C8DB /* AppDelegate.swift in Sources */,
 				A5B613E8220EDD9200D6BEAA /* LoginVC.swift in Sources */,
