@@ -8,127 +8,163 @@
 
 import UIKit
 
-//Cell of the day
-class DaySectionCell: UITableViewCell {
-    @IBOutlet weak var dayTitleLabel: UILabel!
-    @IBOutlet weak var openCloseArrow: UIImageView!
-    
-}
 
 //Entry cells
 class EntryCell: UITableViewCell {
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var thumbImage: UIImageView!
     
-    
+}
+
+struct FakeEntry {
+    var id = ""
+    var imgUrl = ""
+    var img: UIImage?
+    var thumbUrl = ""
+    var thumb = UIImage(named: "loading")
+    var comment = "Loading ..."
+    var date = ""
+    var time = ""
+    var lat = 0.0
+    var lon = 0.0
+    var address = ""
+    var uID = ""
+    //var timeStamp: Timestamp?
+    var dayLiteral = ""
 }
 
 //TableView Diary
-class DiaryTV: UITableViewController {
+class DiaryTV: UITableViewController, DataDelegate {
     
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     var presenter: DiaryTVProtocol?
+    var dataManager = DBManager()
     
-    //Entry data
-    var tableViewData: [Day] = [] { didSet{
-        tableView.reloadData()
-        }}
+    
+    let loadingView = UIView()
+    let spinner = UIActivityIndicatorView()
+    var arrayTest: [Entry] = []
     var isSearching: Bool = false
-
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataManager.dataDel = self
         searchBar.delegate = self
-        tableView.reloadData()
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        tableViewData = (presenter?.prepareArray())!
+        dataManager.EntriesArray.removeAll()
+        dataManager.loadDB()
+        
+        
     }
-    override func viewDidAppear(_ animated: Bool) {
-        //tableView.reloadData()
+
+    
+    func reload() {
+        tableView.layoutSubviews()
+        tableView.reloadData()
         
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        tableViewData.removeAll()
-    }
-        
-        
-        //let day = Day(opened: false, date: "February 1 Friday", sectionData: [entry00, entry00])
-        
-//        tableViewData = [
-//            Day(opened: false, date: "February 1 Friday", sectionData: [entry00, entry00]),
-//                         Day(opened: false, date: "January 30 Wednesday", sectionData: [entry00]),
-//                         Day(opened: false, date: "January 29 Tuesday", sectionData: [entry00, entry00]),
-//                         Day(opened: false, date: "January 27 Sunday", sectionData: [entry00, entry00, entry00])
-//        ]
-       
-    
-    
+   
     // MARK: - Functions
   
 
     // MARK: - Table view data source
-    //Entries are grouped by day. Each day is an expandable cell with subcells for entries
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return (tableViewData.count)
-        
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData[section].opened == true {
-            return (tableViewData[section].sectionData?.count)! + 1
-        } else {
-           return 1
-        }
-        
+        return 1
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            //section title should be the date
-            let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell") as! DaySectionCell
-            cell.dayTitleLabel?.text = tableViewData[indexPath.section].date
-            //arrow up or down
-            if tableViewData[indexPath.section].opened == true {
-                cell.openCloseArrow.image = UIImage(named: "up-arrow")
-            } else {
-                cell.openCloseArrow.image = UIImage(named: "down-arrow")
-            }
-            return cell
+    //Here we decide by how many cells the tableView will be composed of
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if dataManager.EntriesArray.isEmpty {
+            return 1
+        }else if isSearching == false {
+            print(dataManager.EntriesArray)
+            return dataManager.EntriesArray.count
+            
         } else {
-            // cell for the entries
-            let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell") as! EntryCell
-            cell.timeLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].dayTime
-            cell.addressLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].address
-            cell.commentLabel.text = tableViewData[indexPath.section].sectionData?[indexPath.row - 1].myText
-            cell.thumbImage.image = UIImage(named: (tableViewData[indexPath.section].sectionData?[indexPath.row - 1].thumbName)!)
-            return cell
+            print("search \(dataManager.filteredEntries.count)")
+            return dataManager.filteredEntries.count
+        }
+    }
+    
+    //Here we set up the content of each cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath) as! EntryCell
+        
+        let row = indexPath.row
+        tableView.rowHeight = 160
+      
+        if dataManager.EntriesArray.isEmpty {
+            let entryCell = FakeEntry()
+            cell.dateLabel?.text = entryCell.date
+            cell.timeLabel?.text = entryCell.time
+            cell.commentLabel?.text = entryCell.comment
+            cell.addressLabel?.text = entryCell.address
+            cell.thumbImage?.image = entryCell.thumb
+    
+        } else if isSearching == false  {
+            let entryCell = dataManager.EntriesArray[row]
+            cell.dateLabel?.text = entryCell.date
+            cell.timeLabel?.text = entryCell.time
+            cell.commentLabel?.text = entryCell.comment
+            cell.addressLabel?.text = entryCell.address
+            cell.thumbImage?.image = entryCell.thumb
+            
+        } else {
+            let entryCell = dataManager.filteredEntries[row]
+            cell.dateLabel?.text = entryCell.date
+            cell.timeLabel?.text = entryCell.time
+            cell.commentLabel?.text = entryCell.comment
+            cell.addressLabel?.text = entryCell.address
+            cell.thumbImage?.image = entryCell.thumb
             
         }
+        //        print(dataManager.EntriesArray)
+        return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if tableViewData[indexPath.section].opened == true {
-                tableViewData[indexPath.section].opened = false
-                let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none)
-            } else {
-                tableViewData[indexPath.section].opened = true
-                let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none)
-            }
-        } // else condition to do something when clicking on a cell -- "toDetailedView"
+
+        if isSearching == false {
+            presenter?.goToSingleView(comment: dataManager.EntriesArray[indexPath.row].comment,
+                                      address: dataManager.EntriesArray[indexPath.row].address ,
+                                      dayLiteral: dataManager.EntriesArray[indexPath.row].dayLiteral,
+                                      time: dataManager.EntriesArray[indexPath.row].time,
+                                      lat: dataManager.EntriesArray[indexPath.row].lat ?? 0.0,
+                                      lon: dataManager.EntriesArray[indexPath.row].lon ?? 0.0,
+                                      imageName: dataManager.EntriesArray[indexPath.row].imgUrl )
+            
+        } else {
+            presenter?.goToSingleView(comment: dataManager.filteredEntries[indexPath.row].comment,
+                                      address: dataManager.filteredEntries[indexPath.row].address,
+                                      dayLiteral: dataManager.filteredEntries[indexPath.row].dayLiteral,
+                                      time: dataManager.filteredEntries[indexPath.row].time,
+                                      lat: dataManager.filteredEntries[indexPath.row].lat ?? 0.0,
+                                      lon: dataManager.filteredEntries[indexPath.row].lon ?? 0.0,
+                                      imageName: dataManager.filteredEntries[indexPath.row].imgUrl)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            dataManager.deleteImage(position: indexPath.row)
+            dataManager.deleteThumb(position: indexPath.row)
+            dataManager.deleteFromDB(position: indexPath.row)
+            dataManager.EntriesArray.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
     }
     
 
@@ -143,18 +179,28 @@ extension DiaryTV: UISearchBarDelegate {
         } else {
             isSearching = true
             dataManager.filteredEntries = dataManager.EntriesArray.filter { $0.comment.localizedCaseInsensitiveContains( searchText ) ||
-                $0.date.localizedCaseInsensitiveContains( searchText )
+                $0.date.localizedCaseInsensitiveContains( searchText ) ||
+                $0.address.localizedCaseInsensitiveContains( searchText )
             }
             tableView.reloadData()
         }
     }
+    
     //Functions to regulate keyboard behaviour during search
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = true
+        searchBar.showsCancelButton = true
+        
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        isSearching = false
+        tableView.reloadData()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
+
+

@@ -12,21 +12,38 @@ import CoreLocation
 
 
 protocol DataDelegate {
-    func loadEntries()
-    func loadDB()
+    func reload()
     
 }
 
-protocol EntryDelegate {
-    func loadDB()
-    func loadCollection()
-
+struct Day {
+    var opened = Bool()
+    var date: String?
+    var sectionData: [Entry]?
+    var tableIndex = Int()
+    
 }
 
-class DBManager: DBProtocol {
+struct Entry {
+    var id = ""
+    var imgUrl = ""
+    var img: UIImage?
+    var thumbUrl = ""
+    var thumb: UIImage?
+    var comment = ""
+    var date = ""
+    var time = ""
+    var lat: Double?
+    var lon: Double?
+    var address = ""
+    var uID = ""
+    var timeStamp: Timestamp?
+    var dayLiteral = ""
+}
+
+class DBManager {
     
     var dataDel: DataDelegate?
-    var entryDel: EntryDelegate?
     
     let userID = Auth.auth().currentUser?.uid
     
@@ -36,27 +53,11 @@ class DBManager: DBProtocol {
     var imageNames:[String] = []
     var singleEntry = Entry()
     
+    var myArray: [Entry] = []
+    var days: [Day] = []
+    var newDay: Day?
     
-    struct Entry {
-        var id = ""
-        var imgUrl = ""
-        var img:UIImage?
-        var thumbUrl = ""
-        var thumb:UIImage?
-        var comment = ""
-        var date = ""
-        var time = ""
-        var lat:Double?
-        var lon:Double?
-        var address = ""
-        var uID = ""
-        var timeStamp:NSDate?
-        var dayLiteral = ""
-    }
     
-    init() {
-        
-    }
     
     
     /*
@@ -65,10 +66,48 @@ class DBManager: DBProtocol {
      */
     
     
+    func loadDB() {
+        let db = Firestore.firestore()
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        db.collection("Entries2").whereField("uid", isEqualTo: uid).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                guard let qSnapshot = querySnapshot else {return}
+                for document in qSnapshot.documents {
+                    self.singleEntry = Entry()
+                    self.singleEntry.id = document.documentID
+                    self.singleEntry.comment = document.data()["comment"] as? String ?? ""
+                    self.singleEntry.date = document.data()["date"] as? String ?? ""
+                    self.singleEntry.time = document.data()["time"] as? String ?? ""
+                    self.singleEntry.address = document.data()["address"] as? String ?? ""
+                    self.singleEntry.lat = document.data()["lat"] as? Double ?? nil
+                    self.singleEntry.lon = document.data()["lon"] as? Double ?? nil
+                    self.singleEntry.imgUrl = document.data()["img"] as? String ?? ""
+                    self.singleEntry.thumbUrl = document.data()["thumb"] as? String ?? ""
+                    self.singleEntry.timeStamp = document.data()["timestamp"] as? Timestamp
+                    self.singleEntry.dayLiteral = document.data()["dayliteral"] as? String ?? ""
+                    self.EntriesArray.append(self.singleEntry)
+                    
+                    if self.singleEntry.imgUrl != "" {
+                       self.entriesWithImage.append(self.singleEntry)
+                     }
+                }
+                self.EntriesArray.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
+                    (lhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0)
+                })
+                self.entriesWithImage.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
+                    (lhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0)
+                })
+                self.loadThumbs()
+                }
+            }
+        }
+    
     func loadDBtoCollection() {
         let db = Firestore.firestore()
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        db.collection("Entries2").whereField("uID", isEqualTo: uid).getDocuments() { (querySnapshot, err) in
+        db.collection("Entries2").whereField("uid", isEqualTo: uid).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -77,16 +116,9 @@ class DBManager: DBProtocol {
                     
                     self.singleEntry = Entry()
                     self.singleEntry.id = document.documentID
-                    self.singleEntry.comment = document.data()["comment"] as? String ?? ""
-                    self.singleEntry.date = document.data()["date"] as? String ?? ""
-                    self.singleEntry.time = document.data()["time"] as? String ?? ""
-                    self.singleEntry.address = document.data()["address"] as? String ?? ""
-                    self.singleEntry.timeStamp = document.data()["timestamp"] as? NSDate
-                    self.singleEntry.lat = document.data()["lat"] as? Double ?? nil
-                    self.singleEntry.lon = document.data()["lon"] as? Double ?? nil
+                    self.singleEntry.timeStamp = document.data()["timestamp"] as? Timestamp
                     self.singleEntry.imgUrl = document.data()["img"] as? String ?? ""
-                    self.singleEntry.thumbUrl = document.data()["thumb"] as? String ?? ""
-                    self.singleEntry.dayLiteral = document.data()["dayliteral"] as? String ?? ""
+                    
                     self.EntriesArray.append(self.singleEntry)
                     
                     if self.singleEntry.imgUrl != "" {
@@ -94,70 +126,35 @@ class DBManager: DBProtocol {
                     }
                 }
                 self.EntriesArray.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
-                    (lhs.timeStamp?.timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.timeIntervalSince1970 ?? 0)
+                    (lhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0)
+                    
                 })
                 self.entriesWithImage.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
-                    (lhs.timeStamp?.timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.timeIntervalSince1970 ?? 0)
+                    (lhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.dateValue().timeIntervalSince1970 ?? 0)
+                    
                 })
-                self.entryDel?.loadCollection()
-                //self.loadThumbs()
+                DispatchQueue.main.async {
+                    self.delayWithSeconds(1.5) {
+                        self.dataDel?.reload()
+                    }
+                }
             }
         }
-        
     }
     
-    func loadDB() {
-        let db = Firestore.firestore()
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        db.collection("Entries2").whereField("uID", isEqualTo: uid).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                guard let qSnapshot = querySnapshot else {return}
-                for document in qSnapshot.documents {
-                    
-                    self.singleEntry = Entry()
-                    self.singleEntry.id = document.documentID
-                    self.singleEntry.comment = document.data()["comment"] as? String ?? ""
-                    self.singleEntry.date = document.data()["date"] as? String ?? ""
-                    self.singleEntry.time = document.data()["time"] as? String ?? ""
-                    self.singleEntry.address = document.data()["address"] as? String ?? ""
-                    self.singleEntry.timeStamp = document.data()["timestamp"] as? NSDate
-                    self.singleEntry.lat = document.data()["lat"] as? Double ?? nil
-                    self.singleEntry.lon = document.data()["lon"] as? Double ?? nil
-                    self.singleEntry.imgUrl = document.data()["img"] as? String ?? ""
-                    self.singleEntry.thumbUrl = document.data()["thumb"] as? String ?? ""
-                    self.singleEntry.dayLiteral = document.data()["dayliteral"] as? String ?? ""
-                    self.EntriesArray.append(self.singleEntry)
-                    
-                    //if self.singleEntry.imgUrl != "" {
-                    //   self.entriesWithImage.append(self.singleEntry)
-                    // }
-                    
-                    
-                }
-                self.EntriesArray.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
-                    (lhs.timeStamp?.timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.timeIntervalSince1970 ?? 0)
-                    
-                })
-                
-                self.entriesWithImage.sort(by: { (lhs:Entry, rhs:Entry) -> Bool in
-                    (lhs.timeStamp?.timeIntervalSince1970 ?? 0) > (rhs.timeStamp?.timeIntervalSince1970 ?? 0)
-                    
-                })
-                
-                
-                self.dataDel?.loadEntries()
-                self.loadThumbs()
-            }
-        }
+    
+    
+    func getEntries() -> [Entry] {
+        return EntriesArray
     }
     
     //together with the structs we load the thumbs that are going to be shown in the tableView
     func loadThumbs() {
+        
         let storageRef = Storage.storage().reference()
-        for (index,var entry) in EntriesArray.enumerated() {
+            for (index,var entry) in self.EntriesArray.enumerated() {
             let imgRef = storageRef.child(entry.thumbUrl)
+                
             imgRef.getData(maxSize: 1024*1024) { data, error in
                 if let error = error {
                     print(error)
@@ -167,16 +164,24 @@ class DBManager: DBProtocol {
                         self.EntriesArray[index] = entry
                     }
                 }
-                self.dataDel?.loadEntries()
             }
         }
+        DispatchQueue.main.async {
+            self.delayWithSeconds(1.5) {
+                
+                self.dataDel?.reload()
+            }
+
+            
+        }
     }
+    
     //---------------------------------------------------------------------------------
     
     func deleteFromDB(position: Int) {
         let db = Firestore.firestore()
         let deleteID = EntriesArray[position].id
-        db.collection("Entries").document(deleteID).delete() { err in
+        db.collection("Entries2").document(deleteID).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
@@ -217,13 +222,14 @@ class DBManager: DBProtocol {
     func uploadImage(imgName: String) {
         
         if let image = singleEntry.img  {
-            
-            UIGraphicsBeginImageContext(CGSize(width: 288, height: 150))
-            let ratio = Double(image.size.width/image.size.height)
-            let scaleWidth = 288.0
-            let scaleHeight = 288.0/ratio
-            let offsetX = 0.0
-            let offsetY = (scaleHeight-150)/2.0
+            let width = UIScreen.main.bounds.size.width
+            let height = UIScreen.main.bounds.size.height
+            UIGraphicsBeginImageContext(CGSize(width: width, height: height))
+            let ratio = CGFloat(width / height)
+            let scaleWidth = width
+            let scaleHeight = width / ratio
+            let offsetX = CGFloat(0.0)
+            let offsetY = CGFloat((scaleHeight - height)/2.0)
             image.draw(in: CGRect(x: -offsetX, y: -offsetY, width: scaleWidth, height: scaleHeight))
             let largeImg = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -250,11 +256,11 @@ class DBManager: DBProtocol {
     
     func uploadThumb(imgName:String) {
         if let image = singleEntry.img {
-            UIGraphicsBeginImageContext(CGSize(width: 80, height: 80))
+            UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
             let ratio = Double(image.size.width/image.size.height)
-            let scaleWidth = ratio*80.0
-            let scaleHeight = 80.0
-            let offsetX = (scaleWidth-80)/2.0
+            let scaleWidth = ratio * 100.0
+            let scaleHeight = 100.0
+            let offsetX = (scaleWidth-100)/2.0
             let offsetY = 0.0
             image.draw(in: CGRect(x: -offsetX, y: -offsetY, width: scaleWidth, height: scaleHeight))
             
@@ -283,7 +289,7 @@ class DBManager: DBProtocol {
         
         let storageRef = Storage.storage().reference()
         let imgRef = storageRef.child(imgUrl)
-        imgRef.getData(maxSize: 1024*1024) { data, error in
+        imgRef.getData(maxSize: 2048*2048) { data, error in
             if let error = error {
                 print(error)
             } else {
@@ -318,17 +324,20 @@ class DBManager: DBProtocol {
             "address": singleEntry.address,
             "lat": singleEntry.lat ?? 0.0,
             "lon": singleEntry.lon ?? 0.0,
-            "uID": singleEntry.uID,
+            "uid": singleEntry.uID,
             "dayliteral": singleEntry.dayLiteral
         ]
         
         if singleEntry.img != nil {
             dataDict["img"] = imgName + ".jpg"
             dataDict["thumb"] = imgName + "_thumb.jpg"
+        } else {
+            dataDict["img"] = ""
+            dataDict["thumb"] = ""
         }
         
         
-        db.collection("Entries").document().setData(dataDict) { err in
+        db.collection("Entries2").document().setData(dataDict) { err in
             if let err = err {
                 print("Error: \(err)")
             } else {
@@ -361,18 +370,26 @@ class DBManager: DBProtocol {
         let str = formatter.string(from: NSDate() as Date)
         return str
     }
+    
+    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
+    }
 }
 
-protocol DBProtocol {
-    func loadDBtoCollection()
-    func loadDB()
-    func loadThumbs()
-    func deleteFromDB(position: Int)
-    func deleteImage(position: Int)
-    func deleteThumb(position: Int)
-    func uploadImage(imgName: String)
-    func uploadThumb(imgName:String)
-    func loadImage(imgUrl:String)
-    func uploadData()
-    func imgNameFromDate(time: NSDate) -> String
-}
+//protocol DBProtocol: class {
+//    func fillWith(myArray:[Entry]) -> [Day]
+//    func loadDB()
+//    func getEntries() -> [Entry]
+//    func loadThumbs()
+//    func deleteFromDB(position: Int)
+//    func deleteImage(position: Int)
+//    func deleteThumb(position: Int)
+//    func uploadImage(imgName: String)
+//    func uploadThumb(imgName:String)
+//    func loadImage(imgUrl:String)
+//    func uploadData()
+//    func imgNameFromDate(time: NSDate) -> String
+//}
+

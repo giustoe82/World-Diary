@@ -10,20 +10,17 @@ import UIKit
 import Firebase
 import CoreLocation
 
-class NewPostVC: UIViewController {
+class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    
-    
+    let dataManager = DBManager()
     var presenter: newPostPresenterProtocol?
     var locationManager = CLLocationManager()
+    var imagePicker = UIImagePickerController()
+   
     
-    //connection to DB class
-    //let dataManager = DBManager()
     
-    let imagePicker = UIImagePickerController()
     
     //variables and outlets to be stored
-    //var address: String?
     var lat: Double?
     var lon: Double?
     var images: [UIImage]?
@@ -33,72 +30,89 @@ class NewPostVC: UIViewController {
     var oneAddress = String()
     var myLat: Double?
     var myLon: Double?
+    var dayName: String?
     
     @IBOutlet weak var noteTextView: UITextField!
     @IBOutlet weak var imgToSave: UIImageView!
-    
-
- //   override func viewWillDisappear(_ animated: Bool) {
-        
-//        if noteTextView.text != "Your new note here ...", noteTextView.text != "" {
-//
-//            dataManager.singleEntry.comment = noteTextView.text ?? ""
-//            dataManager.singleEntry.date = getCurrentDate()
-//            dataManager.singleEntry.time = getCurrentTime()
-//            dataManager.singleEntry.address = address ?? ""
-//            dataManager.singleEntry.lat = lat ?? 0.0
-//            dataManager.singleEntry.lon = lon ?? 0.0
-//            dataManager.singleEntry.timeStamp = NSDate()
-//            dataManager.singleEntry.uID = uid!
-//
-//            if imgToSave.image != nil {
-//                dataManager.singleEntry.img = imgToSave.image
-//            }
-//            dataManager.uploadData()
-//        }
-//    }
-    
-    
-    
-    @IBAction func printDay(_ sender: Any) {
-        print(getCurrentDay())
-        getLocation()
-    }
-    
-    func getLocation() {
-        
-        print(oneAddress)
-        locationManager.stopUpdatingLocation()
-    }
+    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
+        imagePicker.delegate = self
+        noteTextView.delegate = self
         self.navigationItem.title = getCurrentDate()
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if noteTextView.text == "" {
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = UIColor.lightGray
+        }
+    }
+    
+    
+
+    @IBAction func saveAction(_ sender: Any) {
+        
+        saveToDB()
+        noteTextView.text = ""
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = UIColor.lightGray
         
     }
     
-   
     
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func saveToDB() {
+        dataManager.singleEntry.comment = noteTextView.text ?? ""
+        dataManager.singleEntry.date = getCurrentDate()
+        dataManager.singleEntry.time = getCurrentTime()
+        dataManager.singleEntry.address = oneAddress
+        dataManager.singleEntry.lat = lat ?? 0.0
+        dataManager.singleEntry.lon = lon ?? 0.0
+        dataManager.singleEntry.timeStamp = Timestamp()
+        dataManager.singleEntry.uID = uid!
+        dataManager.singleEntry.dayLiteral = getCurrentDay()
         
-        self.view.endEditing(true)
+        if imgToSave.image != nil {
+            dataManager.singleEntry.img = imgToSave.image
+        }
+        dataManager.uploadData()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        return true
+ //: - MARK: - Keyboard related
+  
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        saveButton.isEnabled = true
+        saveButton.backgroundColor = UIColor.blue
     }
+        
+//        func textFieldDidBeginEditing(_ noteTextView: UITextField) {
+//            saveButton.isEnabled = true
+//            saveButton.backgroundColor = UIColor.blue
+//        }
+    
+        
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            
+            self.view.endEditing(true)
+        }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            
+            textField.resignFirstResponder()
+            
+            return true
+        }
+    
+    
  
-    
+//: - MARK: - Fetch Time and Day
     func getCurrentDate() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -128,10 +142,9 @@ class NewPostVC: UIViewController {
         let today = month + " " + myString + " " + dayInWeek
         return today
     }
-}
 
-extension NewPostVC: UIImagePickerControllerDelegate {
-    
+//: - MARK: - Taking Pictures
+
     @IBAction func takePicture(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
@@ -166,18 +179,20 @@ extension NewPostVC: UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        images?.append((info[UIImagePickerController.InfoKey.originalImage] as? UIImage)!)
+        
+       imgToSave.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         dismiss(animated: true, completion: nil)
     }
+
 }
 
+//: - MARK: - Fetch Location
+
 extension NewPostVC: CLLocationManagerDelegate {
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
         print(oneAddress)
-        //address = ""
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -234,7 +249,7 @@ extension NewPostVC: CLLocationManagerDelegate {
                 print(self.myLon!)
                 self.oneAddress = self.address
                 self.address = ""
-                //print(self.address)
+                
                 
             }
             

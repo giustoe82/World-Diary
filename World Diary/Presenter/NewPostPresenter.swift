@@ -11,12 +11,14 @@ import UIKit
 class NewPostPresenter {
     
     weak var router: Router?
-    
+    //weak var dataStore: Datastore?
 }
 
 extension NewPostPresenter: newPostPresenterProtocol {
     
-    
+    func uploadData() {
+        //dataStore?.dataBaseDelegate?.uploadData()
+    }
     
 }
 
@@ -24,7 +26,7 @@ extension NewPostPresenter: newPostPresenterProtocol {
 //MARK: - Protocol -
 
 protocol newPostPresenterProtocol {
-    
+    func uploadData()
     
     
 }

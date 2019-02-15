@@ -11,16 +11,15 @@ import UIKit
 class DiaryTVPresenter {
     
     weak var router: Router?
+    //var dataStore = DBManager()
+    
     
 }
 
 extension DiaryTVPresenter: DiaryTVProtocol {
 
-//    func getAllPosts() -> [Day] {
-//        return prepareArray()
-//    }
-    func prepareArray() -> [Day] {
-        return (router?.fillWith(myArray: (router?.getEntries())!))!
+    func goToSingleView(comment: String, address: String, dayLiteral: String, time: String, lat: Double, lon: Double, imageName: String) {
+        router?.goToSingleView(comment: comment, address: address, dayLiteral: dayLiteral, time: time, lat: lat, lon: lon, imageName: imageName)
     }
     
     
@@ -30,8 +29,6 @@ extension DiaryTVPresenter: DiaryTVProtocol {
 //MARK: - Protocol -
 
 protocol DiaryTVProtocol {
-    
-    //func getAllPosts() -> [Day]
-    func prepareArray() -> [Day]
+  func goToSingleView(comment: String, address: String, dayLiteral: String, time: String, lat: Double, lon: Double, imageName: String)
 }
 

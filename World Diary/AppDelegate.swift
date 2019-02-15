@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         FirebaseApp.configure()
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -31,10 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         presenter.router = router
         homeViewController.presenter = presenter
         router.rootController = homeViewController
+        //router.dataStore = dataStore.dataBaseDelegate
         window?.rootViewController = initialViewController
-        
-       
-        
+    
         return true
     }
 

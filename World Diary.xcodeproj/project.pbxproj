@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5534921B221046FF00F30D4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5534921A221046FF00F30D4A /* GoogleService-Info.plist */; };
 		5861052FCD44D603FD151625 /* Pods_World_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EFDA129E7D525560B6B632 /* Pods_World_Diary.framework */; };
+		A51BCCFF2216F3C00063D70D /* ShowSingleEntryTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BCCFE2216F3C00063D70D /* ShowSingleEntryTV.swift */; };
 		A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A2220F06840032CCBA /* NewPostVC.swift */; };
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
 		A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AA221057B00032CCBA /* CollectionPresenter.swift */; };
@@ -26,6 +27,7 @@
 		A5342C272203A4BE00F9C8DB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C262203A4BE00F9C8DB /* UIView+Extension.swift */; };
 		A5342C2C2205BF0000F9C8DB /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C2B2205BF0000F9C8DB /* MapVC.swift */; };
 		A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C2D2205BF3A00F9C8DB /* MapPresenter.swift */; };
+		A53A0C722215BAAC0050715D /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A0C712215BAAC0050715D /* UIImage + Extension.swift */; };
 		A5B613E8220EDD9200D6BEAA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B613E7220EDD9200D6BEAA /* LoginVC.swift */; };
 		A5F9E093220E0E2A006514D5 /* LeftMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F9E092220E0E2A006514D5 /* LeftMenuVC.swift */; };
 		A5F9E095220E1446006514D5 /* LeftMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F9E094220E1446006514D5 /* LeftMenuPresenter.swift */; };
@@ -34,6 +36,7 @@
 /* Begin PBXFileReference section */
 		02C582BAE6CCD8F046A44C42 /* Pods-World Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-World Diary.release.xcconfig"; path = "Pods/Target Support Files/Pods-World Diary/Pods-World Diary.release.xcconfig"; sourceTree = "<group>"; };
 		5534921A221046FF00F30D4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A51BCCFE2216F3C00063D70D /* ShowSingleEntryTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSingleEntryTV.swift; sourceTree = "<group>"; };
 		A521D5A2220F06840032CCBA /* NewPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostVC.swift; sourceTree = "<group>"; };
 		A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPresenter.swift; sourceTree = "<group>"; };
 		A521D5A6220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		A5342C262203A4BE00F9C8DB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		A5342C2B2205BF0000F9C8DB /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		A5342C2D2205BF3A00F9C8DB /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		A53A0C712215BAAC0050715D /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		A5B613E7220EDD9200D6BEAA /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A5F9E092220E0E2A006514D5 /* LeftMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuVC.swift; sourceTree = "<group>"; };
 		A5F9E094220E1446006514D5 /* LeftMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuPresenter.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				A5342C152202286300F9C8DB /* Info.plist */,
 				5534921A221046FF00F30D4A /* GoogleService-Info.plist */,
 				A5342C072202286000F9C8DB /* Products */,
+				A53A0C712215BAAC0050715D /* UIImage + Extension.swift */,
 			);
 			path = "World Diary";
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 				A5B613E7220EDD9200D6BEAA /* LoginVC.swift */,
 				A521D5A2220F06840032CCBA /* NewPostVC.swift */,
 				A521D5AC22105BAA0032CCBA /* CollectionVC.swift */,
+				A51BCCFE2216F3C00063D70D /* ShowSingleEntryTV.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -299,6 +305,8 @@
 				A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */,
 				A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */,
 				A5F9E095220E1446006514D5 /* LeftMenuPresenter.swift in Sources */,
+				A53A0C722215BAAC0050715D /* UIImage + Extension.swift in Sources */,
+				A51BCCFF2216F3C00063D70D /* ShowSingleEntryTV.swift in Sources */,
 				A5342C272203A4BE00F9C8DB /* UIView+Extension.swift in Sources */,
 				A5342C2222030A5300F9C8DB /* DiaryTVPresenter.swift in Sources */,
 				A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */,

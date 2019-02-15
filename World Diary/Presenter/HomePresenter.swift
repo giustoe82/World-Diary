@@ -11,7 +11,24 @@ import UIKit
 class HomePresenter {
     
     weak var router: Router?
-    var days: [Day] = []
+    var dataStore = DBManager()
+    var entries: [Entry] = []
+    
+//    let handlerBlock: (Bool) -> Void = { isLoaded in
+//        if isLoaded {
+//
+//        }
+//    }
+//
+//    func workHard(enterDoStuff: (Bool) -> Void) {
+//        // Replicate Downloading/Uploading
+//        for _ in 1...1000 {
+//            print("👷🏻‍👷🏻👷🏽👷🏽️👷🏿‍️👷🏿")
+//        }
+//        enterDoStuff(true)
+//    }
+//
+
     
 }
 
@@ -43,12 +60,19 @@ extension HomePresenter: PresenterToViewProtocol {
         router?.goToNewPost()
     }
     
-    func prepareArray() {
-        router?.fillWith(myArray: (router?.getEntries())!)
+//    func loadDB() {
+//        dataStore.loadDB()
+//        print(dataStore.EntriesArray)
+//    }
+    
+    func loadDB() {
+
+        dataStore.loadDB()
+        
     }
     
+   
 }
-
 
 //MARK: - Protocol -
 
@@ -60,5 +84,6 @@ protocol PresenterToViewProtocol {
     func goToLogin()
     func goToNewPost()
     func goToCollection()
-    func prepareArray()
+    func loadDB()
+    
 }

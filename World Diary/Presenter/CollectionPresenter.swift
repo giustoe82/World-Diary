@@ -11,7 +11,7 @@ import UIKit
 class CollectionPresenter {
     
     weak var router: Router?
-    
+    //weak var dataStore: Datastore?
 }
 
 extension CollectionPresenter: CollectionPresenterProtocol {
