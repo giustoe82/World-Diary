@@ -102,7 +102,7 @@ class Router {
     }
     
     func goToCollection() {
-        let collectionVC = storyBoard.instantiateViewController(withIdentifier: "collection") as? CollectionVC
+        let collectionVC = storyBoard.instantiateViewController(withIdentifier: "collection") as? CollectionGalleryVC
         
         let presenter = CollectionPresenter()
         presenter.router = self

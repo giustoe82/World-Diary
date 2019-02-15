@@ -603,10 +603,10 @@
             </objects>
             <point key="canvasLocation" x="53" y="726"/>
         </scene>
-        <!--CollectionVC-->
+        <!--Collection GalleryVC-->
         <scene sceneID="5dw-10-EAf">
             <objects>
-                <collectionViewController storyboardIdentifier="collection" id="1fI-e8-8QT" customClass="CollectionVC" customModule="World_Diary" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="collection" id="1fI-e8-8QT" customClass="CollectionGalleryVC" customModule="World_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Emm-TD-1RP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

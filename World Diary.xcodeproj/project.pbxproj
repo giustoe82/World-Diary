@@ -13,7 +13,7 @@
 		A521D5A3220F06840032CCBA /* NewPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A2220F06840032CCBA /* NewPostVC.swift */; };
 		A521D5A5220F06D50032CCBA /* NewPostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5A4220F06D50032CCBA /* NewPostPresenter.swift */; };
 		A521D5AB221057B00032CCBA /* CollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AA221057B00032CCBA /* CollectionPresenter.swift */; };
-		A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AC22105BAA0032CCBA /* CollectionVC.swift */; };
+		A521D5AD22105BAB0032CCBA /* CollectionGalleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AC22105BAA0032CCBA /* CollectionGalleryVC.swift */; };
 		A521D5B02212FDE80032CCBA /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521D5AF2212FDE70032CCBA /* DBManager.swift */; };
 		A5342C0A2202286000F9C8DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C092202286000F9C8DB /* AppDelegate.swift */; };
 		A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C0B2202286000F9C8DB /* HomeVC.swift */; };
@@ -42,7 +42,7 @@
 		A521D5A6220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Main.strings"; sourceTree = "<group>"; };
 		A521D5A7220FA5AB0032CCBA /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A521D5AA221057B00032CCBA /* CollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPresenter.swift; sourceTree = "<group>"; };
-		A521D5AC22105BAA0032CCBA /* CollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
+		A521D5AC22105BAA0032CCBA /* CollectionGalleryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionGalleryVC.swift; sourceTree = "<group>"; };
 		A521D5AF2212FDE70032CCBA /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		A5342C062202286000F9C8DB /* World Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "World Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5342C092202286000F9C8DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				A5F9E092220E0E2A006514D5 /* LeftMenuVC.swift */,
 				A5B613E7220EDD9200D6BEAA /* LoginVC.swift */,
 				A521D5A2220F06840032CCBA /* NewPostVC.swift */,
-				A521D5AC22105BAA0032CCBA /* CollectionVC.swift */,
+				A521D5AC22105BAA0032CCBA /* CollectionGalleryVC.swift */,
 				A51BCCFE2216F3C00063D70D /* ShowSingleEntryTV.swift */,
 			);
 			path = ViewControllers;
@@ -302,7 +302,7 @@
 			files = (
 				A5342C1E2203051A00F9C8DB /* HomePresenter.swift in Sources */,
 				A5342C0C2202286000F9C8DB /* HomeVC.swift in Sources */,
-				A521D5AD22105BAB0032CCBA /* CollectionVC.swift in Sources */,
+				A521D5AD22105BAB0032CCBA /* CollectionGalleryVC.swift in Sources */,
 				A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */,
 				A5F9E095220E1446006514D5 /* LeftMenuPresenter.swift in Sources */,
 				A53A0C722215BAAC0050715D /* UIImage + Extension.swift in Sources */,
