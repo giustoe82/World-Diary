@@ -19,10 +19,6 @@ extension NewPostPresenter: newPostPresenterProtocol {
     func uploadData() {
         //dataStore?.dataBaseDelegate?.uploadData()
     }
-    func goToCamera(){
-        router?.goToCamera()
-
-    }
     
 }
 
@@ -30,8 +26,7 @@ extension NewPostPresenter: newPostPresenterProtocol {
 //MARK: - Protocol -
 
 protocol newPostPresenterProtocol {
-
     func uploadData()
-    func goToCamera()
+    
     
 }
