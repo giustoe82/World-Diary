@@ -5,6 +5,231 @@
       location = "group:World Diary.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:World Diary/AppDelegate.swift">
+   </FileRef>
+   <Group
+      location = "group:World Diary/Assets.xcassets"
+      name = "Assets.xcassets">
+      <Group
+         location = "group:night-truck.imageset"
+         name = "night-truck.imageset">
+         <FileRef
+            location = "group:night-truck.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:up-arrow.imageset"
+         name = "up-arrow.imageset">
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+         <FileRef
+            location = "group:up-arrow.png">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:down-arrow.imageset"
+         name = "down-arrow.imageset">
+         <FileRef
+            location = "group:down-arrow.png">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:burger-menu-big.imageset"
+         name = "burger-menu-big.imageset">
+         <FileRef
+            location = "group:menu.png">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:skull.imageset"
+         name = "skull.imageset">
+         <FileRef
+            location = "group:skull.png">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:AppIcon.appiconset"
+         name = "AppIcon.appiconset">
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:burger_menu_small.imageset"
+         name = "burger_menu_small.imageset">
+         <FileRef
+            location = "group:menu (1).png">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:left-arrow.imageset"
+         name = "left-arrow.imageset">
+         <FileRef
+            location = "group:left-arrow.png">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:tempSnow.imageset"
+         name = "tempSnow.imageset">
+         <FileRef
+            location = "group:tempSnow.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:loading.imageset"
+         name = "loading.imageset">
+         <FileRef
+            location = "group:Contents.json">
+         </FileRef>
+         <FileRef
+            location = "group:loading.png">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Contents.json">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:World Diary/Base.lproj"
+      name = "Base.lproj">
+      <FileRef
+         location = "group:LaunchScreen.storyboard">
+      </FileRef>
+      <FileRef
+         location = "group:Main.storyboard">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:World Diary/Datastore.swift">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/DBManager.swift">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/DiaryScan.mlmodel">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/GoogleService-Info.plist">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/Info.plist">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/Motion.h">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/Motion.m">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/objectScaner-Bridging-Header.h">
+   </FileRef>
+   <Group
+      location = "group:World Diary/Presenter"
+      name = "Presenter">
+      <FileRef
+         location = "group:CollectionPresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:MapPresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:LeftMenuPresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:File.swift">
+      </FileRef>
+      <FileRef
+         location = "group:CameraPresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:HomePresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:DiaryTVPresenter.swift">
+      </FileRef>
+      <FileRef
+         location = "group:NewPostPresenter.swift">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:World Diary/Router.swift">
+   </FileRef>
+   <Group
+      location = "group:World Diary/sv-SE.lproj"
+      name = "sv-SE.lproj">
+      <FileRef
+         location = "group:LaunchScreen.strings">
+      </FileRef>
+      <FileRef
+         location = "group:Main.strings">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:World Diary/UIImage + Extension.swift">
+   </FileRef>
+   <FileRef
+      location = "group:World Diary/UIView+Extension.swift">
+   </FileRef>
+   <Group
+      location = "group:World Diary/ViewControllers"
+      name = "ViewControllers">
+      <FileRef
+         location = "group:LeftMenuVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:NewPostVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:ShowSingleEntryTV.swift">
+      </FileRef>
+      <FileRef
+         location = "group:CollectionGalleryVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:DiaryTV.swift">
+      </FileRef>
+      <FileRef
+         location = "group:LoginVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:CameraVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:MapVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:HomeVC.swift">
+      </FileRef>
+      <FileRef
+         location = "group:CollectionVC.swift">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:World Diary/World Diary-Bridging-Header.h">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

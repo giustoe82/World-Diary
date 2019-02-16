@@ -20,8 +20,12 @@ class Router {
     var leftMenuVC: LeftMenuVC?
     var loginVC: LoginVC?
     var mapController: MapVC?
+
     var diaryController: DiaryTV?
     
+
+    var cameraVC: CameraVC?
+
     
     
     
@@ -111,8 +115,27 @@ class Router {
         rootController?.navigationController?.pushViewController(collectionVC!, animated: true)
     }
     
+
   
  
+
+    func goToCamera(){
+        let cameraVC = storyBoard.instantiateViewController(withIdentifier: "camera") as? CameraVC
+        
+        let presenter = CameraPresenter()
+        presenter.router = self
+        cameraVC?.presenter = presenter
+        
+        rootController?.navigationController?.pushViewController(cameraVC!, animated: true)
+    }
+    
+    //: - MARK: - Data transfer
+    
+    func getAllPosts() -> [Entry] {
+        return myArray
+    
+    }
+
     
     
     func logOut(){
