@@ -27,7 +27,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     let newMotion = Motion()
     
     var presenter: CameraPresenterProtocol?
-    //var imagePicker: UIImagePickerController!
     
     let mlModel = DiaryScan()
     
@@ -44,26 +43,16 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationItem.title = advancedCameraTitle
         setUpSession()
-        
-        
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.avSession.stopRunning()
     }
     
-  
-    
-//    @IBAction func clickAction(_ sender: Any) {
-//        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-//        photoOutputFront.capturePhoto(with: settings, delegate: self)
-//
-//    }
-    
     
     func setUpSession() {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-        //                let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .front)
         
         guard let captureDevice = discoverySession.devices.first else {
             print("Hittar inte kameran")
@@ -75,8 +64,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
             avSession.addInput(input)
             
             avSession.sessionPreset = AVCaptureSession.Preset.high
-            //            avSession.sessionPreset = AVCaptureSession.Preset.vga640x480
-            
             let videoOutput = AVCaptureVideoDataOutput()
             videoOutput.alwaysDiscardsLateVideoFrames = true
             let videoQueue = DispatchQueue(label: "objectLabel", attributes: .concurrent)

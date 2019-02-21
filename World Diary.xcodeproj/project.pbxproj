@@ -31,7 +31,6 @@
 		A5342C272203A4BE00F9C8DB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C262203A4BE00F9C8DB /* UIView+Extension.swift */; };
 		A5342C2C2205BF0000F9C8DB /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C2B2205BF0000F9C8DB /* MapVC.swift */; };
 		A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5342C2D2205BF3A00F9C8DB /* MapPresenter.swift */; };
-		A53A0C722215BAAC0050715D /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A0C712215BAAC0050715D /* UIImage + Extension.swift */; };
 		A5A1C9E2221CC80A002B2E4A /* SingleViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1C9E1221CC80A002B2E4A /* SingleViewPresenter.swift */; };
 		A5A1C9E6221E16F9002B2E4A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5A1C9E8221E16F9002B2E4A /* Localizable.strings */; };
 		A5A1C9EC221EAA27002B2E4A /* FullScreenPicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1C9EB221EAA27002B2E4A /* FullScreenPicVC.swift */; };
@@ -73,7 +72,6 @@
 		A5342C262203A4BE00F9C8DB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		A5342C2B2205BF0000F9C8DB /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		A5342C2D2205BF3A00F9C8DB /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
-		A53A0C712215BAAC0050715D /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		A5A1C9E1221CC80A002B2E4A /* SingleViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewPresenter.swift; sourceTree = "<group>"; };
 		A5A1C9E7221E16F9002B2E4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5A1C9E9221E1700002B2E4A /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				A5342C262203A4BE00F9C8DB /* UIView+Extension.swift */,
-				A53A0C712215BAAC0050715D /* UIImage + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -372,7 +369,6 @@
 				A5342C2E2205BF3A00F9C8DB /* MapPresenter.swift in Sources */,
 				A5F9E095220E1446006514D5 /* LeftMenuPresenter.swift in Sources */,
 				A51BCD0922185B660063D70D /* DiaryScan.mlmodel in Sources */,
-				A53A0C722215BAAC0050715D /* UIImage + Extension.swift in Sources */,
 				A51BCD0722185B020063D70D /* Motion.m in Sources */,
 				A51BCCFF2216F3C00063D70D /* ShowSingleEntryTV.swift in Sources */,
 				A51BCD0322185A290063D70D /* CameraVC.swift in Sources */,

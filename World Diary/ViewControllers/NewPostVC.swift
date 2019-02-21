@@ -18,7 +18,6 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     var presenter: newPostPresenterProtocol?
     var locationManager = CLLocationManager()
     var imagePicker = UIImagePickerController()
-   //var frameExtractor: CameraVC?
     
     //variables and outlets to be stored
     var lat: Double?
@@ -35,7 +34,6 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     @IBOutlet weak var noteTextView: UITextField!
     @IBOutlet weak var imgToSave: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
-    //@IBOutlet weak var openAdvancedCameraButton: UIButton!
     
     var imageToShare: UIImage?
     var editOngoing: Bool = false
@@ -47,9 +45,6 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
         dataManager.EntriesArray.removeAll()
         dataManager.loadDataBase()
-        
-//        frameExtractor = CameraVC()
-//        frameExtractor?.delegate = self as? FrameExtractorDelegate
         locationManager.delegate = self
         imagePicker.delegate = self
         noteTextView.delegate = self
@@ -76,15 +71,6 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             saveButton.backgroundColor = UIColor.lightGray
         }
     }
-    
-//    @IBAction func openAdvancedCameraAction(_ sender: Any) {
-//        presenter?.goToAdvancedCamera()
-//    }
-//
-//    func captured(image: UIImage) {
-//        imgToSave.image = image
-//    }
-    
 
     @IBAction func saveAction(_ sender: Any) {
         if editOngoing == false {

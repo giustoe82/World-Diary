@@ -37,14 +37,9 @@ class Router {
     }
     
     func goToDiary() {
-//        if diaryController == nil {
-//            diaryController = storyBoard.instantiateViewController(withIdentifier: "diary") as? DiaryTV
-//
-//            let presenter = DiaryTVPresenter()
-//            presenter.router = self
-//            diaryController!.presenter = presenter
-//        }
-        rootController?.navigationController?.popToRootViewController(animated: true)    }
+        rootController?.navigationController?.popToRootViewController(animated: true)
+        
+    }
     
     //Map
     func presentMapVC() {

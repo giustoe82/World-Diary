@@ -22,11 +22,9 @@ class FullScreenPicVC: UIViewController {
         
     }
     
-
     @IBAction func shareAction(_ sender: Any) {
         facebookShare(image: imageLarge.image!)
     }
-    
     
     func loadImage(imgUrl:String)  {
         let storageRef = Storage.storage().reference()
