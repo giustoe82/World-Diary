@@ -12,7 +12,7 @@ import MapKit
 class ArtworkView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
-            // 1
+            
             guard let artwork = newValue as? Artwork else { return }
             canShowCallout = true
             calloutOffset = CGPoint(x: -5, y: 5)
@@ -20,8 +20,6 @@ class ArtworkView: MKMarkerAnnotationView {
                                                     size: CGSize(width: 30, height: 30)))
             mapsButton.setBackgroundImage(UIImage(named: "search"), for: UIControl.State())
             rightCalloutAccessoryView = mapsButton
-            // 2
-            //glyphText = String(artwork.comment.first!)
             
             let detailLabel = UILabel()
             detailLabel.numberOfLines = 0

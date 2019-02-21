@@ -25,6 +25,11 @@ class LoginVC: UIViewController {
         
     }
     
+    let titleWrong1 = NSLocalizedString("titleWrong1", comment: "")
+    let messageWrong1 = NSLocalizedString("messageWrong1", comment: "")
+    let errormsg = NSLocalizedString("error", comment: "")
+    let repeatPwdMessage = NSLocalizedString("repeatPwdMessage", comment: "")
+    
     
     /*
      Rules for SIGN UP and LOGIN when the user clicks on the button SIGN UP/LOGIN
@@ -32,11 +37,11 @@ class LoginVC: UIViewController {
     @IBAction func topTapped(_ sender: Any) {
         
         if emailTextField.text == "" || passwordTextField.text == "" {
-            displayAlert(title: "Missing Information", message: "You must provide both email and password")
+            displayAlert(title: titleWrong1, message: messageWrong1)
         } else {
             if signUpMode && (passwordTextField.text != repeatPasswordTextField.text || repeatPasswordTextField.text == "") {
                 
-                displayAlert(title: "Error", message: "You must repeat the password")
+                displayAlert(title: errormsg, message: repeatPwdMessage)
             } else {
                 if let email = emailTextField.text {
                     if let password = passwordTextField.text {
@@ -46,7 +51,7 @@ class LoginVC: UIViewController {
                                 if error != nil {
                                     self.displayAlert(title: "Error", message: error!.localizedDescription)
                                 } else {
-                                    print("Sign Up Successful")
+                                    //print("Sign Up Successful")
                                     self.emailTextField.text = ""
                                     self.passwordTextField.text = ""
                                     self.repeatPasswordTextField.text = ""
@@ -57,9 +62,9 @@ class LoginVC: UIViewController {
                             //LOG IN
                             Auth.auth().signIn(withEmail: email, password: password, completion:{ (user, error) in
                                 if error != nil {
-                                    self.displayAlert(title: "error", message: error!.localizedDescription)
+                                    self.displayAlert(title: self.errormsg, message: error!.localizedDescription)
                                 } else {
-                                    print("Log In Successful")
+                                    //print("Log In Successful")
                                     //If LOGIN is successfull the user's details are saved locally in
                                     //UserDefaults
                                     UserDefaults.standard.set(Auth.auth().currentUser?.uid, forKey: "uid")
@@ -75,6 +80,10 @@ class LoginVC: UIViewController {
         }
     }
     
+    let btnTitleLogin = NSLocalizedString("btnTitleLogin", comment: "")
+    let btnTitleSwitch = NSLocalizedString("btnTitleSwitch", comment: "")
+    let btnTitleSignUp = NSLocalizedString("btnTitleSignUp", comment: "")
+    let btnTitleSwitch2 = NSLocalizedString("btnTitleSwitch2", comment: "")
     
     /*
      The lower button rules the appearance of this view through changing the value of the
@@ -83,14 +92,14 @@ class LoginVC: UIViewController {
     @IBAction func downTapped(_ sender: Any) {
         
         if signUpMode {
-            topButton.setTitle("Log In", for: .normal)
-            downButton.setTitle("Switch to Sign Up", for: .normal)
+            topButton.setTitle(btnTitleLogin, for: .normal)
+            downButton.setTitle(btnTitleSwitch, for: .normal)
             repeatPasswordTextField.isHidden = true
             signUpMode = false
             
         } else {
-            topButton.setTitle("Sign Up", for: .normal)
-            downButton.setTitle("Switch to Log In", for: .normal)
+            topButton.setTitle(btnTitleSignUp, for: .normal)
+            downButton.setTitle(btnTitleSwitch2, for: .normal)
             repeatPasswordTextField.isHidden = false
             signUpMode = true
         }

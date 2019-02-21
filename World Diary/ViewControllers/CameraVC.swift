@@ -39,7 +39,12 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let advancedCameraTitle = NSLocalizedString("advancedCameraTitle", comment: "")
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationItem.title = advancedCameraTitle
         setUpSession()
+        
         
     }
     

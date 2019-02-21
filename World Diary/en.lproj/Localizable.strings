@@ -5,3 +5,27 @@
   Created by Marco Giustozzi on 2019-02-21.
   Copyright © 2019 marcog. All rights reserved.
 */
+
+//Home
+"home-title" = "Home";
+"diary-title" = "Diary";
+//Map
+"map-title" = "Map";
+//Login
+"titleWrong1" = "Missing information";
+"messageWrong1" = "You must provide both email and password";
+"error" = "Error";
+"repeatPwdMessage" = "You must repeat the password";
+"btnTitleLogin" = "Login";
+"btnTitleSwitch" = "Switch to Sign Up";
+"btnTitleSignUp" = "Sign Up";
+"btnTitleSwitch2" = "Switch to Log In";
+//SingleView
+"singleViewTitle" = "Post Details";
+//Advanced Camera
+"advancedCameraTitle" = "Advanced Camera";
+//Gallery
+"collectionTitle" = "My Photos";
+
+
+

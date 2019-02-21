@@ -37,19 +37,16 @@ extension MapVC: CLLocationManagerDelegate, MKMapViewDelegate, DataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationItem.title = NSLocalizedString("map-title", comment: "")
+        
         dataManager.dataDel = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         //locationManager.requestLocation()
         animateLoadingView()
-        
-        
-        let artwork = Artwork(title: "King David Kalakaua",
-                              locationName: "Waikiki Gateway Park",
-                              comment: "Sculpture",
-                              coordinate: CLLocationCoordinate2D(latitude: 21.283921, longitude: -157.831661))
-        myMap.addAnnotation(artwork)
         
     }
     

@@ -13,7 +13,6 @@ class Artwork: NSObject, MKAnnotation {
     let title: String?
     let locationName: String?
     let comment: String
-    //let picture: UIImage?
     let coordinate: CLLocationCoordinate2D
     
     init(title: String, locationName: String, comment: String, coordinate: CLLocationCoordinate2D) {

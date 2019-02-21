@@ -5,3 +5,24 @@
   Created by Marco Giustozzi on 2019-02-21.
   Copyright © 2019 marcog. All rights reserved.
 */
+
+//Home
+"home-title" = "Hem";
+"diary-title" = "Dagbok";
+//Map
+"map-title" = "Karta";
+//Login
+"titleWrong1" = "Info saknas";
+"messageWrong1" = "Du måste ange både e-mejl och lösenord";
+"error" = "Fel";
+"repeatPwdMessage" = "Du måste upprepa lösenord";
+"btnTitleLogin" = "Logga in";
+"btnTitleSwitch" = "Byta till Sign Up";
+"btnTitleSignUp" = "Registrera ny användare";
+"btnTitleSwitch2" = "Byta till Login";
+//SingleView
+"singleViewTitle" = "Detalierat inlägg";
+//Advanced Camera
+"advancedCameraTitle" = "Avancerade kamera";
+//Gallery
+"collectionTitle" = "Mina Bilder";

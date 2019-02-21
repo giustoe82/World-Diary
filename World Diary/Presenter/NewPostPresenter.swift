@@ -16,8 +16,8 @@ class NewPostPresenter {
 
 extension NewPostPresenter: newPostPresenterProtocol {
     
-    func goToAdvancedCamera() {
-        router?.goToAdvancedCamera()
+    func redirect() {
+        router?.goToDiary()
     }
     
 }
@@ -26,5 +26,5 @@ extension NewPostPresenter: newPostPresenterProtocol {
 //MARK: - Protocol -
 
 protocol newPostPresenterProtocol {
-    func goToAdvancedCamera()    
+    func redirect()
 }

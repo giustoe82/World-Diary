@@ -223,7 +223,7 @@ class DBManager {
             let scaleWidth = width
             let scaleHeight = width / ratio
             let offsetX = CGFloat(0.0)
-            let offsetY = CGFloat((scaleHeight - height)/2.0)
+            let offsetY = CGFloat((scaleHeight - height)/2)
             image.draw(in: CGRect(x: -offsetX, y: -offsetY, width: scaleWidth, height: scaleHeight))
             let largeImg = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()

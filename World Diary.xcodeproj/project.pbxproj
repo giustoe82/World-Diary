@@ -81,6 +81,7 @@
 		A5A1C9EE221EBCA9002B2E4A /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		A5A1C9F0221EC279002B2E4A /* ArtworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkView.swift; sourceTree = "<group>"; };
 		A5B613E7220EDD9200D6BEAA /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		A5D04D2E221F028500C0ECF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A5F9E092220E0E2A006514D5 /* LeftMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuVC.swift; sourceTree = "<group>"; };
 		A5F9E094220E1446006514D5 /* LeftMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuPresenter.swift; sourceTree = "<group>"; };
 		B1EFDA129E7D525560B6B632 /* Pods_World_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_World_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,6 +404,7 @@
 			children = (
 				A5342C0E2202286000F9C8DB /* Base */,
 				A521D5A6220FA5AB0032CCBA /* sv-SE */,
+				A5D04D2E221F028500C0ECF9 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

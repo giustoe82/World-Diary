@@ -53,6 +53,8 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         locationManager.delegate = self
         imagePicker.delegate = self
         noteTextView.delegate = self
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationItem.title = getCurrentDate()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -88,6 +90,7 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         if editOngoing == false {
             saveToDB()
             noteTextView.text = ""
+            imgToSave.image = nil
             saveButton.isEnabled = false
             saveButton.backgroundColor = UIColor.lightGray
         } else if editOngoing, entryToEdit != nil {
@@ -95,6 +98,8 @@ class NewPostVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             noteTextView.text = ""
             saveButton.isEnabled = false
             saveButton.backgroundColor = UIColor.lightGray
+            imgToSave.image = nil
+            presenter?.redirect()
         }
     }
     

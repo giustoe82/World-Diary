@@ -18,6 +18,9 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationItem.title = NSLocalizedString("home-title", comment: "")
         // (Optional) Prevent status bar area from turning black when menu appears:
         //SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn

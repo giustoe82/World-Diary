@@ -48,6 +48,10 @@ class DiaryTV: UITableViewController, DataDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationItem.title = NSLocalizedString("diary-title", comment: "")
         dataManager.dataDel = self
         searchBar.delegate = self
         

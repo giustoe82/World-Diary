@@ -41,6 +41,11 @@ class ShowSingleEntryTV: UITableViewController, MKMapViewDelegate {
     @IBAction func toEditViewAction(_ sender: Any) {
         if entry != nil {
             presenter?.toEdit(entry: entry!, index: index!)
+            dateTimeLabel.text = ""
+            commentLabel.text = ""
+            addressLabel.text = ""
+            imageField.image = nil
+            //self.popViewController(animated: true)
         }
     }
     
@@ -69,7 +74,10 @@ class ShowSingleEntryTV: UITableViewController, MKMapViewDelegate {
     }
     
     func setup() {
-        self.navigationItem.title = "Details"
+        let singleTitle = NSLocalizedString("singleViewTitle", comment: "")
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        self.navigationItem.title = singleTitle
         getComment = entry?.comment
         getAddress = entry?.address
         getDate = entry?.date
