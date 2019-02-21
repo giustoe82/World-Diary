@@ -22,12 +22,9 @@ class Router {
     var mapController: MapVC?
     var diaryController: DiaryTV?
     
-    
-    
-    
-    
 //: - MARK: - Navigation
     
+    //Diary TableView
     func presentDiaryTV() {
         if diaryController == nil {
             diaryController = storyBoard.instantiateViewController(withIdentifier: "diary") as? DiaryTV
@@ -39,6 +36,7 @@ class Router {
         rootController?.navigationController?.pushViewController(diaryController!, animated: true)
     }
     
+    //Map
     func presentMapVC() {
 
         if mapController == nil {
@@ -50,34 +48,33 @@ class Router {
         rootController?.navigationController?.pushViewController(mapController!, animated: true)
     }
     
+    //SideMenu
     func openLeftMenu() {
         
         if leftMenuVC == nil {
            leftMenuVC = storyBoard.instantiateViewController(withIdentifier: "leftMenu") as? LeftMenuVC
-            
             let leftMenuPresenter = LeftMenuPresenter()
             leftMenuPresenter.router = self
             leftMenuVC?.presenter = leftMenuPresenter
         }
-        
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: leftMenuVC!)
         
         SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
-        
         rootController?.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
         
     }
     
     func goToLogin() {
+        //Redirect to Home if user is logged
         if UserDefaults.standard.value(forKey: "uid") == nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             loginVC = storyBoard.instantiateViewController(withIdentifier: "loginVC") as? LoginVC
             
             rootController?.present(loginVC!, animated: true, completion: nil)
         }
-        
     }
     
+    //New Post Creation
     func goToNewPost() {
         let newPostVC = storyBoard.instantiateViewController(withIdentifier: "newPostVC") as? NewPostVC
         
@@ -88,19 +85,34 @@ class Router {
         rootController?.navigationController?.pushViewController(newPostVC!, animated: true)
     }
     
-    func goToSingleView(comment: String, address: String, dayLiteral: String, time: String, lat: Double, lon: Double, imageName: String) {
+    //New Post Editing
+    func toEdit(entry: Entry, index: Int) {
+        let newPostVC = storyBoard.instantiateViewController(withIdentifier: "newPostVC") as? NewPostVC
+        
+        let presenter = NewPostPresenter()
+        presenter.router = self
+        newPostVC?.presenter = presenter
+        newPostVC?.entryToEdit = entry
+        newPostVC?.editOngoing = true
+        newPostVC?.index = index
+        
+        rootController?.navigationController?.pushViewController(newPostVC!, animated: true)
+    }
+    
+    //Detailed Post
+    func goToSingleView(entry: Entry, index: Int) {
         let singleVC = storyBoard.instantiateViewController(withIdentifier: "singleEntryVC") as? ShowSingleEntryTV
-       
-        singleVC?.getComment = comment
-        singleVC?.getAddress = address
-        singleVC?.getDate = dayLiteral
-        singleVC?.getTime = time
-        singleVC?.getLat = lat
-        singleVC?.getLon = lon
-        singleVC?.getImageName = imageName
+        
+        let presenter = SingleViewPresenter()
+        presenter.router = self
+        singleVC?.presenter = presenter
+        singleVC?.entry = entry
+        singleVC?.index = index
+
         rootController?.navigationController?.pushViewController(singleVC!, animated: true)
     }
     
+    //Photo CollectionView
     func goToCollection() {
         let collectionVC = storyBoard.instantiateViewController(withIdentifier: "collection") as? CollectionGalleryVC
         
@@ -111,8 +123,22 @@ class Router {
         rootController?.navigationController?.pushViewController(collectionVC!, animated: true)
     }
     
-  
- 
+    func goToFullScreen(image: String) {
+        let fullScreenVC = storyBoard.instantiateViewController(withIdentifier: "fullScreenVC") as? FullScreenPicVC
+        fullScreenVC?.loadImage(imgUrl: image)
+        rootController?.navigationController?.pushViewController(fullScreenVC!, animated: true)
+    }
+    
+    //AI
+    func goToAdvancedCamera(){
+        let cameraVC = storyBoard.instantiateViewController(withIdentifier: "cameraVC") as? CameraVC
+        
+        let presenter = AdvancedCameraPresenter()
+        presenter.router = self
+        cameraVC?.presenter = presenter
+        
+        rootController?.navigationController?.pushViewController(cameraVC!, animated: true)
+    }
     
     
     func logOut(){

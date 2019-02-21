@@ -11,12 +11,12 @@ import UIKit
 class CollectionPresenter {
     
     weak var router: Router?
-    //weak var dataStore: Datastore?
+    
 }
 
 extension CollectionPresenter: CollectionPresenterProtocol {
-    func showFullImage() {
-        
+    func showFullImage(image: String) {
+        router?.goToFullScreen(image: image)
     }
     
     
@@ -27,7 +27,7 @@ extension CollectionPresenter: CollectionPresenterProtocol {
 
 protocol CollectionPresenterProtocol {
     
-    func showFullImage()
+    func showFullImage(image: String)
     
 }
 

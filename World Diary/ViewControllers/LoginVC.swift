@@ -10,19 +10,13 @@ import UIKit
 import Firebase
 
 
-
-/*
- This class takes care of SIGN UP and LOGIN functions
- */
 class LoginVC: UIViewController {
     
     var signUpMode = true
     
-    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var repeatPasswordTextField: UITextField!
-    
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     
@@ -123,22 +117,6 @@ class LoginVC: UIViewController {
         textField.resignFirstResponder()
         return true
     }
-    
-    
-    
-    /*
-     After the user LOGGED IN for the first time then he will be redirected to the next view
-     every other time he starts the app
-     */
-//    override func viewWillAppear(_ animated: Bool) {
-//        if UserDefaults.standard.value(forKey: "uid") != nil {
-//            DispatchQueue.main.async() {
-//                //Very Interesting!!!!!🤔
-//                [unowned self] in
-//                self.performSegue(withIdentifier: "Logged", sender: nil)
-//            }
-//        }
-//    }
     
 }
 

@@ -11,8 +11,6 @@ import SideMenu
 
 class HomeVC: UIViewController {
     
-    
-    
     var presenter: PresenterToViewProtocol?
     
     @IBOutlet weak var leftMenuBarButton: UIBarButtonItem!
@@ -26,21 +24,16 @@ class HomeVC: UIViewController {
         SideMenuManager.default.menuAnimationFadeStrength = 0.7
         SideMenuManager.default.menuAnimationTransformScaleFactor = 0.9
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter?.goToLogin()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //presenter?.loadDB()
     }
     
     @IBAction func openLeftMenuButton(_ sender: Any) {
         presenter?.openLeftMenu()
     }
+    
     @IBAction func toDiaryButton(_ sender: Any) {
         presenter?.toDiaryTV()
     }
@@ -57,5 +50,9 @@ class HomeVC: UIViewController {
         presenter?.goToCollection()
     }
     
+    @IBAction func toAdvancedCamera(_ sender: Any) {
+      presenter?.goToAdvCamera()
+    }
+
 }
 

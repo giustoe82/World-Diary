@@ -15,16 +15,15 @@ class LeftMenuPresenter {
 }
 
 extension LeftMenuPresenter: LeftMenuPresenterProtocol {
+    
     func logOut() {
         router?.logOut()
-        
     }
+    
 }
 
 //MARK: - Protocol -
 
 protocol LeftMenuPresenterProtocol {
-    
     func logOut()
-    
 }

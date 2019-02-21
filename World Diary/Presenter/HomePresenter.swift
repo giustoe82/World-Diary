@@ -14,22 +14,6 @@ class HomePresenter {
     var dataStore = DBManager()
     var entries: [Entry] = []
     
-//    let handlerBlock: (Bool) -> Void = { isLoaded in
-//        if isLoaded {
-//
-//        }
-//    }
-//
-//    func workHard(enterDoStuff: (Bool) -> Void) {
-//        // Replicate Downloading/Uploading
-//        for _ in 1...1000 {
-//            print("👷🏻‍👷🏻👷🏽👷🏽️👷🏿‍️👷🏿")
-//        }
-//        enterDoStuff(true)
-//    }
-//
-
-    
 }
 
 extension HomePresenter: PresenterToViewProtocol {
@@ -38,14 +22,12 @@ extension HomePresenter: PresenterToViewProtocol {
         router?.goToCollection()
     }
     
-    
     func openLeftMenu() {
         router?.openLeftMenu()
     }
     
     func toDiaryTV() {
         router?.presentDiaryTV()
-        //prepareArray()
     }
     
     func toMapVC() {
@@ -60,30 +42,26 @@ extension HomePresenter: PresenterToViewProtocol {
         router?.goToNewPost()
     }
     
-//    func loadDB() {
-//        dataStore.loadDB()
-//        print(dataStore.EntriesArray)
-//    }
-    
-    func loadDB() {
-
-        dataStore.loadDB()
-        
+    func goToAdvCamera() {
+        router?.goToAdvancedCamera()
     }
     
-   
+    func loadDB() {
+        dataStore.loadDataBase()
+    }
+    
 }
 
 //MARK: - Protocol -
 
 protocol PresenterToViewProtocol {
-    
     func openLeftMenu()
     func toDiaryTV()
     func toMapVC()
     func goToLogin()
     func goToNewPost()
     func goToCollection()
+    func goToAdvCamera()
     func loadDB()
     
 }

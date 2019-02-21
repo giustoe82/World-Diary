@@ -8,20 +8,23 @@
 
 import UIKit
 import Firebase
+import FacebookCore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var router: Router = Router()
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //FacebookSDK and Firebase
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
         
+        //Instantiate NavigationController on Start
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        
-        //Instantiate Navigation controller on Start
         let initialViewController = storyBoard.instantiateViewController(withIdentifier: "NavigationHome") as! UINavigationController
         
         //Instantiate Home ViewController
@@ -30,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         presenter.router = router
         homeViewController.presenter = presenter
         router.rootController = homeViewController
-        //router.dataStore = dataStore.dataBaseDelegate
         window?.rootViewController = initialViewController
     
         return true
@@ -56,6 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    //Permission Facebook
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let appId: String = SDKSettings.appId
+        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
+            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        }
+        return false
     }
 
 

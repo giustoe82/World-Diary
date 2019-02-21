@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //Entry cells
 class EntryCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
@@ -16,9 +15,9 @@ class EntryCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var thumbImage: UIImageView!
-    
 }
 
+//Loading Cell content
 struct FakeEntry {
     var id = ""
     var imgUrl = ""
@@ -32,26 +31,20 @@ struct FakeEntry {
     var lon = 0.0
     var address = ""
     var uID = ""
-    //var timeStamp: Timestamp?
     var dayLiteral = ""
 }
 
 //TableView Diary
 class DiaryTV: UITableViewController, DataDelegate {
     
-    
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     var presenter: DiaryTVProtocol?
     var dataManager = DBManager()
-    
-    
     let loadingView = UIView()
     let spinner = UIActivityIndicatorView()
     var arrayTest: [Entry] = []
     var isSearching: Bool = false
-    
-    
+    var entryToDisplay: Entry?
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +52,12 @@ class DiaryTV: UITableViewController, DataDelegate {
         searchBar.delegate = self
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         dataManager.EntriesArray.removeAll()
-        dataManager.loadDB()
-        
+        dataManager.loadDataBase()
         
     }
-
     
     func reload() {
         tableView.layoutSubviews()
@@ -73,34 +65,26 @@ class DiaryTV: UITableViewController, DataDelegate {
         
     }
    
-    // MARK: - Functions
-  
-
-    // MARK: - Table view data source
+// MARK: - TableView DataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    //Here we decide by how many cells the tableView will be composed of
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if dataManager.EntriesArray.isEmpty {
             return 1
         }else if isSearching == false {
             print(dataManager.EntriesArray)
             return dataManager.EntriesArray.count
-            
         } else {
             print("search \(dataManager.filteredEntries.count)")
             return dataManager.filteredEntries.count
         }
     }
     
-    //Here we set up the content of each cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath) as! EntryCell
-        
         let row = indexPath.row
         tableView.rowHeight = 160
       
@@ -111,7 +95,6 @@ class DiaryTV: UITableViewController, DataDelegate {
             cell.commentLabel?.text = entryCell.comment
             cell.addressLabel?.text = entryCell.address
             cell.thumbImage?.image = entryCell.thumb
-    
         } else if isSearching == false  {
             let entryCell = dataManager.EntriesArray[row]
             cell.dateLabel?.text = entryCell.date
@@ -119,7 +102,6 @@ class DiaryTV: UITableViewController, DataDelegate {
             cell.commentLabel?.text = entryCell.comment
             cell.addressLabel?.text = entryCell.address
             cell.thumbImage?.image = entryCell.thumb
-            
         } else {
             let entryCell = dataManager.filteredEntries[row]
             cell.dateLabel?.text = entryCell.date
@@ -127,37 +109,20 @@ class DiaryTV: UITableViewController, DataDelegate {
             cell.commentLabel?.text = entryCell.comment
             cell.addressLabel?.text = entryCell.address
             cell.thumbImage?.image = entryCell.thumb
-            
         }
-        //        print(dataManager.EntriesArray)
         return cell
-        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         if isSearching == false {
-            presenter?.goToSingleView(comment: dataManager.EntriesArray[indexPath.row].comment,
-                                      address: dataManager.EntriesArray[indexPath.row].address ,
-                                      dayLiteral: dataManager.EntriesArray[indexPath.row].dayLiteral,
-                                      time: dataManager.EntriesArray[indexPath.row].time,
-                                      lat: dataManager.EntriesArray[indexPath.row].lat ?? 0.0,
-                                      lon: dataManager.EntriesArray[indexPath.row].lon ?? 0.0,
-                                      imageName: dataManager.EntriesArray[indexPath.row].imgUrl )
-            
+            presenter?.goToSingleView(entry: dataManager.EntriesArray[indexPath.row], index: indexPath.row)
         } else {
-            presenter?.goToSingleView(comment: dataManager.filteredEntries[indexPath.row].comment,
-                                      address: dataManager.filteredEntries[indexPath.row].address,
-                                      dayLiteral: dataManager.filteredEntries[indexPath.row].dayLiteral,
-                                      time: dataManager.filteredEntries[indexPath.row].time,
-                                      lat: dataManager.filteredEntries[indexPath.row].lat ?? 0.0,
-                                      lon: dataManager.filteredEntries[indexPath.row].lon ?? 0.0,
-                                      imageName: dataManager.filteredEntries[indexPath.row].imgUrl)
+            presenter?.goToSingleView(entry: dataManager.filteredEntries[indexPath.row], index: indexPath.row)
         }
     }
     
+    //Delete Post
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == UITableViewCell.EditingStyle.delete {
             dataManager.deleteImage(position: indexPath.row)
             dataManager.deleteThumb(position: indexPath.row)
@@ -167,8 +132,13 @@ class DiaryTV: UITableViewController, DataDelegate {
         }
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
 }
+
+// MARK: - SearchBar
 
 extension DiaryTV: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -189,8 +159,8 @@ extension DiaryTV: UISearchBarDelegate {
     //Functions to regulate keyboard behaviour during search
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
@@ -198,9 +168,11 @@ extension DiaryTV: UISearchBarDelegate {
         isSearching = false
         tableView.reloadData()
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+    
 }
 
 

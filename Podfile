@@ -15,4 +15,8 @@ pod 'FirebaseUI/Storage'
 
 pod 'SideMenu'
 
+pod 'FacebookCore'
+pod 'FacebookLogin'
+pod 'FacebookShare'
+
 end

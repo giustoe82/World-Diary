@@ -11,19 +11,16 @@ import UIKit
 class MapPresenter {
     
     weak var router: Router?
-    //var dataStore = Datastore()
+    
 }
 
 extension MapPresenter: MapProtocol {
     
-    
 }
-
 
 //MARK: - Protocol -
 
 protocol MapProtocol {
-    
     
 }
 

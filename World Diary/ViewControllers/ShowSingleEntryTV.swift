@@ -12,47 +12,36 @@ import Firebase
 
 class ShowSingleEntryTV: UITableViewController, MKMapViewDelegate {
     
+    var presenter: SingleViewPresenterProtocol?
     
-    
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var imageField: UIImageView!
     
-    var getComment = String()
-    var getAddress = String()
-    var getDate = String()
-    var getTime = String()
-    var getLat = Double()
-    var getLon = Double()
-    var getImageName = String()
-    
-    
-    
+    var getComment: String?
+    var getAddress: String?
+    var getDate: String?
+    var getTime: String?
+    var getLat: Double?
+    var getLon: Double?
+    var getImageName: String?
+    var entry: Entry?
+    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        setupMapView()
         
-        self.navigationItem.title = "Details"
-        dateTimeLabel.text = getDate + " at " + getTime
-        commentLabel.text = getComment
-        addressLabel.text = getAddress
-        loadImage(imgUrl: getImageName)
-        print(getLat)
-        
-        
-        
-        
-        let center = CLLocationCoordinate2D(latitude: getLat, longitude: getLon)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-        map.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        annotation.title = "Entry taken here"
-        map.addAnnotation(annotation)
-        
+    }
+    
+    @IBAction func toEditViewAction(_ sender: Any) {
+        if entry != nil {
+            presenter?.toEdit(entry: entry!, index: index!)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -73,15 +62,38 @@ class ShowSingleEntryTV: UITableViewController, MKMapViewDelegate {
             return 0
         } else if cell.tag == 5 && getImageName != ""{
             return 300
+        } else if cell.tag == 6 {
+            return 50
         }
         return 20
     }
     
+    func setup() {
+        self.navigationItem.title = "Details"
+        getComment = entry?.comment
+        getAddress = entry?.address
+        getDate = entry?.date
+        getTime = entry?.time
+        getLat = entry?.lat
+        getLon = entry?.lon
+        getImageName = entry?.imgUrl
+        dateTimeLabel.text = getDate! + " at " + getTime!
+        commentLabel.text = getComment
+        addressLabel.text = getAddress
+        loadImage(imgUrl: getImageName!)
+    }
     
-    
+    func setupMapView() {
+        let center = CLLocationCoordinate2D(latitude: getLat!, longitude: getLon!)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        map.setRegion(region, animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        annotation.title = "Entry taken here"
+        map.addAnnotation(annotation)
+    }
     
     func loadImage(imgUrl:String)  {
-        
         let storageRef = Storage.storage().reference()
         let imgRef = storageRef.child(imgUrl)
         imgRef.getData(maxSize: 1024*1024) { data, error in
@@ -91,7 +103,6 @@ class ShowSingleEntryTV: UITableViewController, MKMapViewDelegate {
                 if let imgData = data {
                     
                     if let myImg = UIImage(data: imgData) {
-                        
                         self.imageField.image = myImg
                         
                     }

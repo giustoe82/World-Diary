@@ -14,7 +14,6 @@ class LeftMenuVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,11 +24,7 @@ class LeftMenuVC: UITableViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    
-    
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch indexPath.row {
         case 0:
             presenter?.logOut()
@@ -42,5 +37,4 @@ class LeftMenuVC: UITableViewController {
         }
     }
     
-
 }
