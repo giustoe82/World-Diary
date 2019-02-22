@@ -36,9 +36,8 @@ class Router {
         rootController?.navigationController?.pushViewController(diaryController!, animated: true)
     }
     
-    func goToDiary() {
-        rootController?.navigationController?.popToRootViewController(animated: true)
-        
+    func goToHome() {
+        rootController?.navigationController?.popViewController(animated: true)
     }
     
     //Map
@@ -72,10 +71,11 @@ class Router {
     func goToLogin() {
         //Redirect to Home if user is logged
         if UserDefaults.standard.value(forKey: "uid") == nil {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             loginVC = storyBoard.instantiateViewController(withIdentifier: "loginVC") as? LoginVC
-            
-            rootController?.present(loginVC!, animated: true, completion: nil)
+            let loginPresenter = LoginPresenter()
+            loginPresenter.router = self
+            loginVC?.presenter = loginPresenter
+            rootController?.navigationController?.pushViewController(loginVC!, animated: true)
         }
     }
     
@@ -152,9 +152,12 @@ class Router {
         SideMenuManager.default.menuLeftNavigationController?.dismiss(animated: true)
         if loginVC == nil {
             loginVC = storyBoard.instantiateViewController(withIdentifier: "loginVC") as? LoginVC
-            rootController?.present(loginVC!, animated: true, completion: nil)
+            let loginPresenter = LoginPresenter()
+            loginPresenter.router = self
+            loginVC?.presenter = loginPresenter
+            rootController?.navigationController?.pushViewController(loginVC!, animated: true)
         } else {
-            rootController?.present(loginVC!, animated: true, completion: nil)
+            rootController?.navigationController?.pushViewController(loginVC!, animated: true)
         }
     }
     

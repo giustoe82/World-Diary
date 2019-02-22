@@ -236,7 +236,6 @@
                         <outlet property="passwordTextField" destination="El0-TI-bHK" id="8hp-w5-so2"/>
                         <outlet property="repeatPasswordTextField" destination="1Du-Yd-I2A" id="AiX-oZ-FNJ"/>
                         <outlet property="topButton" destination="Hwe-bN-jIv" id="iTd-vS-RVZ"/>
-                        <segue destination="jWR-cs-syg" kind="presentation" identifier="Logged" id="sV7-K7-byg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Hi-HS-4WX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -246,7 +245,6 @@
         <!--Navigation Controller-->
         <scene sceneID="U9p-zv-eLo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="epv-zH-GCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="NavigationHome" id="jWR-cs-syg" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9FY-ZT-fSB">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -257,6 +255,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="R7Y-wt-Akj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="epv-zH-GCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-709" y="26"/>
         </scene>

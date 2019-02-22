@@ -17,7 +17,7 @@ class NewPostPresenter {
 extension NewPostPresenter: newPostPresenterProtocol {
     
     func redirect() {
-        router?.goToDiary()
+        router?.goToHome()
     }
     
 }

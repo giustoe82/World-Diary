@@ -13,7 +13,7 @@ import Firebase
 class LoginVC: UIViewController {
     
     var signUpMode = true
-    
+    var presenter: LoginProtocol?
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var repeatPasswordTextField: UITextField!
@@ -23,6 +23,16 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     let titleWrong1 = NSLocalizedString("titleWrong1", comment: "")
@@ -70,7 +80,8 @@ class LoginVC: UIViewController {
                                     UserDefaults.standard.set(Auth.auth().currentUser?.uid, forKey: "uid")
                                     self.emailTextField.text = ""
                                     self.passwordTextField.text = ""
-                                    self.performSegue(withIdentifier: "Logged", sender: nil)
+                                    self.presenter?.goToHome()
+                                    //self.performSegue(withIdentifier: "Logged", sender: nil)
                                 }
                             })
                         }
